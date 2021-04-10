@@ -25,7 +25,7 @@ import { StorageService } from './storage.service';
       <label for="password">Password</label>
       <input type="password" class="form-control" id="password" formControlName="password">
     </div>
-    <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Submit</button>
+    <button type="submit" mat-raised-button color="primary" [disabled]="!myForm.valid">Submit</button>
 </form>
   `,
   styles: [

@@ -10,6 +10,10 @@ import { ProtectedComponent } from './protected.component';
 import { UserGuard } from './user.guard';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './token.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
+import { MatButtonModule } from '@angular/material/button';
 
 const routes: Routes = [
   { path: 'login' , component: LoginComponent },
@@ -29,7 +33,10 @@ const routes: Routes = [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
+    // material UI
+    MatButtonModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
