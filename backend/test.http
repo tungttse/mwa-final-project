@@ -1,0 +1,31 @@
+###
+POST http://localhost:3000/api/auth/login
+content-type: application/json
+
+{
+    "email":"abc@gmail.com",
+    "password":"123456"
+}
+
+###
+POST http://localhost:3000/api/auth/signup
+content-type: application/json
+
+{
+    "email":"abc@gmail.com",
+    "password":"123456"
+}
+
+###
+POST http://localhost:3000/api/auth/checkemail
+content-type: application/json
+
+{
+    "email":"abc@gmail.com"
+}
+
+
+###
+GET http://localhost:3000/api/protected
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiY0BnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRUZFhsb0hXOWFzN0VSVkR1VU40ell1aEpPaEpMQ1BBeHp1OVY0OWp3OFRqblhwbHRRYUJWMiIsImlhdCI6MTYxNzkzNzg0OX0.x5XENQYoDX9EagVevI2zZrTr0CsIhppNaIHh8r75Ra0
+
