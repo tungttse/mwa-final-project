@@ -19,10 +19,23 @@ router.get('/:id', function (req, res, next) {
     })
 });
 
-router.patch('/columns/:board_id', function (req, res, next) {
+router.patch('/order/columns/:board_id', function (req, res, next) {
   let boardId = req.params.board_id;
   let data = req.body
   new BoardServices(req.boardsCollection).updateColumnOrder(boardId, data)
+    .then(serviceResp => {
+      res.json(serviceResp.modifiedCount)
+    })
+    .catch(err => {
+      res.json({ error: err })
+    })
+});
+
+
+router.patch('/order/cards/:board_id', function (req, res, next) {
+  let boardId = req.params.board_id;
+  let data = req.body
+  new BoardServices(req.boardsCollection).updateCardOrder(boardId, data)
     .then(serviceResp => {
       res.json(serviceResp.modifiedCount)
     })

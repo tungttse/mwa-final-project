@@ -31,6 +31,10 @@ export class BoardService {
   }
 
   changeOrderColumn(boardId, body) {
-    return this.http.patch(this.serverUrl +'/boards/columns/' + boardId, body)
+    return this.http.patch(this.serverUrl +'/boards/order/columns/' + boardId, body)
+  }
+
+  changeOrderCard(boardId, body) {
+    return this.http.patch(this.serverUrl +'/boards/order/cards/' + boardId, body)
   }
 }
