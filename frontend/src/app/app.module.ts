@@ -19,6 +19,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MaterialModule} from './material.module';
 
+import { DragulaModule } from 'ng2-dragula';
+
 const routes: Routes = [
   { path: 'login' , component: LoginComponent },
   { path: 'signup' , component: SignupComponent },
@@ -47,6 +49,7 @@ const routes: Routes = [
     // material UI
     MaterialModule,
     FlexLayoutModule,
+    DragulaModule.forRoot()
     
   ],
   providers: [

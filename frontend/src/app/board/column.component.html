@@ -1,3 +1,11 @@
 <div>
-    {{name}}
+    <div class="column-name">{{name}}</div>
+
+    <div class="column-card-list">
+        <div class="card-item" *ngFor="let card of cards">
+            {{card.title}}
+            <!-- <board-column name="{{col.name}}" [cards]="col.cards"></board-column> -->
+        </div>
+    </div>
+    
 </div>

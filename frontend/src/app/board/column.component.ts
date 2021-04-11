@@ -8,6 +8,7 @@ import { BoardService } from '../services/board.service'
 })
 export class ColumnComponent implements OnInit {
   @Input() name
+  @Input() cards
   constructor(private boardService: BoardService ) { }
 
   ngOnInit(): void {
