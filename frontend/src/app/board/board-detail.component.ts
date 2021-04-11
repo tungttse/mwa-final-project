@@ -58,12 +58,15 @@ export class BoardDetailComponent implements OnInit {
 
      this.subs.add(this.dragulaService.dropModel("COLUMNS")
       .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
-        console.log('dropModel:',  targetModel, item);
-        //TODO: from targetModel, update again to the DB
-        /*
-        
-        */
-        
+       for (let index = 0; index < targetModel.length; index++) {
+         const element = targetModel[index];
+         let body = {
+           "column_id" : element._id,
+           "new_order" : index + 1
+         }
+         this.boardService.changeOrderColumn(this.boardId, body)
+         .subscribe(re => console.log(re))
+       }
       })
     );
     // this.subs.add(this.dragulaService.removeModel("COLUMNS")
@@ -94,7 +97,6 @@ export class BoardDetailComponent implements OnInit {
         } else {
           this.content = res
           this.columns = res['columns']
-
         }
       }
     )

@@ -30,4 +30,7 @@ export class BoardService {
     return this.http.get(this.serverUrl +'/boards/' + id)
   }
 
+  changeOrderColumn(boardId, body) {
+    return this.http.patch(this.serverUrl +'/boards/columns/' + boardId, body)
+  }
 }
