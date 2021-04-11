@@ -10,6 +10,7 @@ import { Observable, of } from "rxjs";
 import { map, catchError } from "rxjs/operators";
 import { AuthService } from '../services/auth.service';
 import { StorageService } from '../services/storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -24,6 +25,7 @@ export class SignupComponent {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private router: Router,
     private storageService : StorageService
     ) {
     
@@ -53,6 +55,7 @@ export class SignupComponent {
     const confirmPassword = group.get('repassword').value;
 
     if(password == "" && confirmPassword == "") return null
+    // console.log(password,confirmPassword )
     return password === confirmPassword ? null : { notSame: true }     
   }
   
@@ -63,6 +66,7 @@ export class SignupComponent {
           alert(res['error'])
         } else {
           this.storageService.token = res['token']
+          this.router.navigateByUrl('/boards');
         }
       }
     )
