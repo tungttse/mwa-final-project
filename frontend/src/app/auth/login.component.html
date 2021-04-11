@@ -1,17 +1,15 @@
 <div>
-
     <div class="container">
         <br>
         <div class="container">
             <br>
             <div fxLayout="row" fxLayoutAlign="center" class="content" fxLayout.xs="column">
-                <div fxFlex="20%">
+                <div fxFlex.xs="40%" fxFlex.sm="60%" fxFlex.md="40%" fxFlex="30%">
                     <mat-card class="card">
                         <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
                             <h3>Login</h3>
                         </mat-card-title>
                         <mat-card-content>
-                            <div [hidden]="!isLogedIn">You are logged in</div>
                             <form [formGroup]="myForm" (ngSubmit)="onSubmit()" [hidden]="isLogedIn">
                                 <div class="example-container">
                                     <mat-form-field appearance="fill">
@@ -20,7 +18,6 @@
                                         <span mat-icon-button matSuffix >
                                             <mat-icon>email</mat-icon>
                                         </span>
-
                                         <mat-error *ngIf="!myForm.get('email').valid">{{getErrorMessage()}}</mat-error>
                                     </mat-form-field>
 

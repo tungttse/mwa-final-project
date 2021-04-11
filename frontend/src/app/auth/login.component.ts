@@ -7,12 +7,12 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { StorageService } from '../services/storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: 'login.component.html',
-  styles: [
-  ]
+  styleUrls: ['login.component.css']
 })
 export class LoginComponent implements OnInit {
   hide = false
@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, 
     private authService: AuthService,
+    private router: Router,
     private storageService: StorageService
     ) { 
     
@@ -44,7 +45,6 @@ export class LoginComponent implements OnInit {
     if (this.myForm.get('email').hasError('required')) {
       return 'You must enter a value';
     }
-
     return this.myForm.get('email').hasError('email') ? 'Not a valid email' : '';
   }
 
@@ -52,10 +52,12 @@ export class LoginComponent implements OnInit {
     this.authService.doPostLogin(this.myForm.value).subscribe(
       res => {
         if(res['error']) {
+          //TODO: show message 
           alert(res['error'])
         } else {
           this.storageService.token = res['token']
           this.isLogedIn = true
+          this.router.navigateByUrl('/boards');
         }
       }
     )

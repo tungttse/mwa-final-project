@@ -14,13 +14,7 @@ import { StorageService } from '../services/storage.service';
 @Component({
   selector: 'app-signup',
   templateUrl: 'signup.component.html',
-  styles: [
-    `.error{
-      color: red;
-      font-size: 10px;
-      font-style: italic;
-    }`
-  ]
+  styleUrls: [ 'signup.component.css' ]
 })
 export class SignupComponent {
   hide: Boolean = true

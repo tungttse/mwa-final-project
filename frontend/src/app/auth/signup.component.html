@@ -4,14 +4,13 @@
         <div class="container">
             <br>
             <div fxLayout="row" fxLayoutAlign="center" class="content" fxLayout.xs="column">
-                <div fxFlex="40">
+                <div fxFlex.xs="40%" fxFlex.sm="60%" fxFlex.md="40%" fxFlex="30%">
                     <mat-card class="card">
-                        <mat-card-title fxLayout.gt-xs="column" fxLayout.xs="column">
-                            <h3>Login</h3>
+                        <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+                            <h3>Register</h3>
                         </mat-card-title>
                         <mat-card-content>
-                            <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-                                
+                            <form [formGroup]="myForm" (ngSubmit)="onSubmit()"> 
                                     <mat-form-field appearance="fill">
                                         <mat-label>Enter your email</mat-label>
                                         <input matInput type='text' id="email" formControlName="email">
