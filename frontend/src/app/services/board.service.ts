@@ -22,7 +22,6 @@ export class BoardService {
       });
     }
 
-
   get(){
     return this.http.get(this.serverUrl +'/boards')
   }

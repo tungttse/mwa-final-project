@@ -6,8 +6,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './auth/login.component';
 import { SignupComponent } from './auth/signup.component'
 import { Routes, RouterModule } from '@angular/router';
+
 import { BoardComponent } from './board/board.component';
 import { BoardDetailComponent } from './board/board-detail.component';
+import { ColumnComponent } from './board/column.component';
+
 import { UserGuard } from './user.guard';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './token.interceptor';
@@ -32,7 +35,8 @@ const routes: Routes = [
     LoginComponent,
     SignupComponent,
     BoardComponent,
-    BoardDetailComponent
+    BoardDetailComponent,
+    ColumnComponent
   ],
   imports: [
     BrowserModule,

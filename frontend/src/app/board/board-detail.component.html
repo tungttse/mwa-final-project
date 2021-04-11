@@ -1,11 +1,12 @@
 <div>
     <div class="container">
-        
         <div class="container">
             <div class="info">Board name</div>
             <div class="scroll-area">
                 <div cdkDropList cdkDropListOrientation="horizontal" class="column-list" (cdkDropListDropped)="drop($event)">
-                    <div class="card-box" *ngFor="let timePeriod of timePeriods" cdkDrag>{{timePeriod}}</div>
+                    <div class="card-box" *ngFor="let name of columns" cdkDrag>
+                        <board-column name="{{name}}"></board-column>
+                    </div>
                 </div>
             </div>
         </div>
