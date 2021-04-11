@@ -7,6 +7,7 @@ import { LoginComponent } from './auth/login.component';
 import { SignupComponent } from './auth/signup.component'
 import { Routes, RouterModule } from '@angular/router';
 import { BoardComponent } from './board/board.component';
+import { BoardDetailComponent } from './board/board-detail.component';
 import { UserGuard } from './user.guard';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './token.interceptor';
@@ -19,7 +20,7 @@ const routes: Routes = [
   { path: 'login' , component: LoginComponent },
   { path: 'signup' , component: SignupComponent },
   {
-    path: 'boards/:id', component: BoardComponent, canActivate: [UserGuard]
+    path: 'boards/:id', component: BoardDetailComponent, canActivate: [UserGuard]
   },
   {
     path: 'boards', component: BoardComponent, canActivate: [UserGuard]
@@ -30,7 +31,8 @@ const routes: Routes = [
     AppComponent,
     LoginComponent,
     SignupComponent,
-    BoardComponent
+    BoardComponent,
+    BoardDetailComponent
   ],
   imports: [
     BrowserModule,
