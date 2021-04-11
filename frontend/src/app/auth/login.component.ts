@@ -5,8 +5,8 @@ import {
   Validators,
   FormBuilder,
 } from '@angular/forms';
-import { AuthService } from './services/auth.service';
-import { StorageService } from './storage.service';
+import { AuthService } from '../services/auth.service';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-login',

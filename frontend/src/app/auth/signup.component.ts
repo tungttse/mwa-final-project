@@ -8,8 +8,8 @@ import {
 } from "@angular/forms";
 import { Observable, of } from "rxjs";
 import { map, catchError } from "rxjs/operators";
-import { AuthService } from './services/auth.service';
-import { StorageService } from './storage.service';
+import { AuthService } from '../services/auth.service';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-signup',

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ContentService } from './content.service';
+import { ContentService } from '../services/content.service'
 
 @Component({
   selector: 'app-protected',

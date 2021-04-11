@@ -3,10 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { LoginComponent } from './login.component';
-import { SignupComponent } from './signup.component'
+import { LoginComponent } from './auth/login.component';
+import { SignupComponent } from './auth/signup.component'
 import { Routes, RouterModule } from '@angular/router';
-import { ProtectedComponent } from './protected.component';
+import { ProtectedComponent } from './board/protected.component';
 import { UserGuard } from './user.guard';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './token.interceptor';
