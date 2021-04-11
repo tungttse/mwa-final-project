@@ -1,27 +1,24 @@
 <div>
-
     <div class="container">
         <br>
         <div class="container">
             <br>
             <div fxLayout="row" fxLayoutAlign="center" class="content" fxLayout.xs="column">
-                <div fxFlex="20%">
+                <div fxFlex="40">
                     <mat-card class="card">
-                        <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+                        <mat-card-title fxLayout.gt-xs="column" fxLayout.xs="column">
                             <h3>Login</h3>
                         </mat-card-title>
                         <mat-card-content>
-                            <div [hidden]="!isLogedIn">You are logged in</div>
-                            <form [formGroup]="myForm" (ngSubmit)="onSubmit()" [hidden]="isLogedIn">
-                                <div class="example-container">
+                            <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+                                
                                     <mat-form-field appearance="fill">
                                         <mat-label>Enter your email</mat-label>
-                                        <input matInput [type]="hide ? 'password' : 'text'" id="email" formControlName="email">
+                                        <input matInput type='text' id="email" formControlName="email">
                                         <span mat-icon-button matSuffix >
                                             <mat-icon>email</mat-icon>
                                         </span>
-
-                                        <mat-error *ngIf="!myForm.get('email').valid">{{getErrorMessage()}}</mat-error>
+                                        <mat-error *ngIf="!myForm.get('email').valid">{{emailErrorMsg}}</mat-error>
                                     </mat-form-field>
 
                                     <mat-form-field appearance="fill">
@@ -32,8 +29,17 @@
                                             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                         </span>
                                     </mat-form-field>
-                                </div>
 
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Re-enter your password</mat-label>
+                                        <input matInput [type]="hide ? 'password' : 'text'" id="repassword" formControlName="repassword">
+                                        <span mat-icon-button matSuffix (click)="hide = !hide"
+                                            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                        </span>
+                                        <mat-error *ngIf="myForm.hasError('notSame')">Mismatch password</mat-error>
+                                    </mat-form-field>
+                                    
                                 <button type="submit" mat-raised-button color="primary"
                                     [disabled]="!myForm.valid">Submit</button>
                             </form>

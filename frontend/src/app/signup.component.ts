@@ -13,32 +13,7 @@ import { StorageService } from './storage.service';
 
 @Component({
   selector: 'app-signup',
-  template: `
-    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="email">E-Mail</label>
-        <input type="text" class="form-control" id="email" formControlName="email">
-        <div *ngIf="!myForm.get('email').valid" class="error">
-          {{emailErrorMsg}}
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" formControlName="password">
-      </div>
-
-      <div class="form-group">
-      <label for="password">RePassword</label>
-      <input type="password" class="form-control" id="repassword" formControlName="repassword">
-      <div *ngIf="myForm.hasError('notSame')" class="error">
-        Mismatch password
-      </div>
-    </div>
-
-     <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Submit</button>
-  </form>
-  `,
+  templateUrl: 'signup.component.html',
   styles: [
     `.error{
       color: red;
@@ -48,6 +23,7 @@ import { StorageService } from './storage.service';
   ]
 })
 export class SignupComponent {
+  hide: Boolean = true
   myForm: FormGroup;
   emailErrorMsg: String
 
