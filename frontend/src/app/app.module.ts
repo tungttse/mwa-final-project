@@ -12,8 +12,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './token.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
-import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MaterialModule} from './material.module';
 
@@ -22,6 +20,9 @@ const routes: Routes = [
   { path: 'signup' , component: SignupComponent },
   {
     path: 'boards/:id', component: BoardComponent, canActivate: [UserGuard]
+  },
+  {
+    path: 'boards', component: BoardComponent, canActivate: [UserGuard]
   }
 ]
 @NgModule({

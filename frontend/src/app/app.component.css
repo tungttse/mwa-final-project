@@ -41,3 +41,17 @@ a:active {
   margin: 0;
   width: 85%;
 }
+
+/* Tung */
+mat-sidenav-container{
+    background-color: #3c4252!important;
+}
+
+mat-toolbar{
+    background-color: #f5f5f5 im !important;
+}
+
+
+.name-text{
+    color: #3c4252;
+}

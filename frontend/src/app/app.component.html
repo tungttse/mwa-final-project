@@ -1,29 +1,23 @@
 <mat-sidenav-container>
     <mat-sidenav-content>
-        <mat-toolbar color="primary">
+        <mat-toolbar>
             <div>
-                <a routerLink="/">
+                <a class="name-text" routerLink="/">
                     MWA Trello
                 </a>
             </div>
 
             <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
                 <ul fxLayout fxLayoutGap="20px" class="navigation-items">
-                    <!-- <li>
-                <a>
-                    <mat-icon class="icon">input</mat-icon>
-                    <span  class="label">Login</span>
-                </a>
-            </li> -->
                     <li>
-                        <a routerLink="/login">
+                        <a routerLink="/login" class="name-text">
                             <mat-icon class="icon">home</mat-icon>
                             <span class="label">Login</span>
                         </a>
                     </li>
 
                     <li>
-                        <a routerLink="/signup">
+                        <a routerLink="/signup" class="name-text">
                             <mat-icon class="icon">input</mat-icon>
                             <span class="label">Signup</span>
                         </a>
