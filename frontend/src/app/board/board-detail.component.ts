@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { BoardService } from '../services/board.service'
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DragulaService } from "ng2-dragula";
-import { Subscription } from "rxjs";
+import { from, Subscription } from "rxjs";
 import {Router, ActivatedRoute, Params} from '@angular/router';
-
+import * as _ from 'underscore';
 @Component({
   selector: 'board-detail',
   templateUrl: 'board-detail.component.html',
@@ -25,7 +25,6 @@ export class BoardDetailComponent implements OnInit {
     private dragulaService: DragulaService,
     private activatedRoute: ActivatedRoute
   ) {
-
     this.boardId = this.activatedRoute.snapshot.paramMap.get('id');
     
     this.dragulaService.createGroup("COLUMNS", {
@@ -96,7 +95,7 @@ export class BoardDetailComponent implements OnInit {
           console.log('Error')
         } else {
           this.content = res
-          this.columns = res['columns']
+          this.columns = _.sortBy(res['columns'], "order")
         }
       }
     )
