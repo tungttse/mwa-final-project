@@ -19,4 +19,16 @@ router.get('/:id', function (req, res, next) {
     })
 });
 
+router.patch('/columns/:board_id', function (req, res, next) {
+  let boardId = req.params.board_id;
+  let data = req.body
+  new BoardServices(req.boardsCollection).updateColumnOrder(boardId, data)
+    .then(serviceResp => {
+      res.json(serviceResp.modifiedCount)
+    })
+    .catch(err => {
+      res.json({ error: err })
+    })
+});
+
 module.exports = router;
