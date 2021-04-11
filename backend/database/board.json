@@ -1,0 +1,54 @@
+{
+    "_id": "boardid",
+    "name": "board_name",
+    "user": {
+        "_id": "user_id",
+        "email":"abc@gmail.com",
+        "first_name":"F",
+        "last_name": "L"
+    },
+    "columns": [
+        {
+            "_id" : "column id",
+            "name": "column_name",
+            "order": 1,
+            "cards": [
+                {
+                    "_id": "card_id",
+                    "title": "doing homework 1",
+                    "order": 1,
+                    "description": "this is the content of a card",
+                    "label": "tag name",
+                    "column": "column_name",
+                    "board": "board_name",
+                    "deadline": "01/01/2022",
+                    "created_date": "01/01/2022",
+                    "updated_date": "01/01/2022"
+                    
+                }
+            ]
+        },
+
+        {
+            "_id" : "column id 2",
+            "name": "column_name2",
+            "order": 2,
+            "cards": [
+                {
+                    "_id": "card_id",
+                    "title": "doing homework 1",
+                    "order": 1,
+                    "description": "this is the content of a card",
+                    "label": "tag name",
+                    "column": "column_name",
+                    "board": "board_name",
+                    "deadline": "01/01/2022",
+                    "created_date": "01/01/2022",
+                    "updated_date": "01/01/2022"
+                    
+                }
+            ]
+        }
+
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "_id": "hello@gmail.com",
+    "password": "sswrewrewrwer2343243",
+    "first_name": "fn",
+    "last_name": "ln",
+    "gender": 0,
+    "birth_date":"01/01/2022",
+    "created_date": "01/01/2022",
+    "updated_date": "01/01/2022",
+
+    "boards": [
+        {
+            "_id": "id_boards",
+            "name": "board name"
+        },
+
+        {
+            "_id": "id_boards2",
+            "name": "board name 2"
+        }
+    ]
+}
