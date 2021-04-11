@@ -14,6 +14,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import { MatButtonModule } from '@angular/material/button';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import {MaterialModule} from './material.module';
 
 const routes: Routes = [
   { path: 'login' , component: LoginComponent },
@@ -36,7 +38,9 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     // material UI
-    MatButtonModule,
+    MaterialModule,
+    FlexLayoutModule,
+    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

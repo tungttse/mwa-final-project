@@ -1,0 +1,58 @@
+<div>
+
+    <div class="container">
+        <br>
+        <div class="container">
+            <br>
+            <div fxLayout="row" fxLayoutAlign="center" class="content" fxLayout.xs="column">
+                <div fxFlex="20%">
+                    <mat-card class="card">
+                        <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+                            <h3>Login</h3>
+                        </mat-card-title>
+                        <mat-card-content>
+                            <div [hidden]="!isLogedIn">You are logged in</div>
+                            <form [formGroup]="myForm" (ngSubmit)="onSubmit()" [hidden]="isLogedIn">
+                                <div class="example-container">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Enter your email</mat-label>
+                                        <input matInput [type]="hide ? 'password' : 'text'" id="email" formControlName="email">
+                                        <span mat-icon-button matSuffix >
+                                            <mat-icon>email</mat-icon>
+                                        </span>
+
+                                        <mat-error *ngIf="!myForm.get('email').valid">{{getErrorMessage()}}</mat-error>
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Enter your password</mat-label>
+                                        <input matInput [type]="hide ? 'password' : 'text'" id="password" formControlName="password">
+                                        <span mat-icon-button matSuffix (click)="hide = !hide"
+                                            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                        </span>
+                                    </mat-form-field>
+                                </div>
+
+                                <!-- <div class="form-group">
+                                    <label for="email">E-Mail</label>
+                                    <input type="text" class="form-control" id="email" formControlName="email">
+                                    <div *ngIf="!myForm.get('email').valid">
+                                        Invalid Email
+                                    </div>
+                                </div> -->
+
+                                <!-- <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" id="password" formControlName="password">
+                                </div> -->
+                                <button type="submit" mat-raised-button color="primary"
+                                    [disabled]="!myForm.valid">Submit</button>
+                            </form>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

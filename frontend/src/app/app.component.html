@@ -1,12 +1,38 @@
-<h1>
-    {{title}}
-</h1>
+<mat-sidenav-container>
+    <mat-sidenav-content>
+        <mat-toolbar color="primary">
+            <div>
+                <a routerLink="/">
+                    MWA Trello
+                </a>
+            </div>
 
-<nav>
-    <a routerLink="/">Home</a> | <a routerLink="/login">Login</a> | <a routerLink="/signup">Signup</a> | <a
-        routerLink="/protected"> Protected Area </a>
-</nav>
+            <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
+                <ul fxLayout fxLayoutGap="20px" class="navigation-items">
+                    <!-- <li>
+                <a>
+                    <mat-icon class="icon">input</mat-icon>
+                    <span  class="label">Login</span>
+                </a>
+            </li> -->
+                    <li>
+                        <a routerLink="/login">
+                            <mat-icon class="icon">home</mat-icon>
+                            <span class="label">Login</span>
+                        </a>
+                    </li>
 
-<div class="outlet">
-    <router-outlet></router-outlet>
-</div>
+                    <li>
+                        <a routerLink="/signup">
+                            <mat-icon class="icon">input</mat-icon>
+                            <span class="label">Signup</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </mat-toolbar>
+        <main>
+            <router-outlet></router-outlet>
+        </main>
+    </mat-sidenav-content>
+</mat-sidenav-container>

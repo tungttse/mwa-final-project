@@ -5,34 +5,17 @@ import {
   Validators,
   FormBuilder,
 } from '@angular/forms';
-import { AuthService } from './auth.service';
+import { AuthService } from './services/auth.service';
 import { StorageService } from './storage.service';
 
 @Component({
   selector: 'app-login',
-  template: `
-  <div [hidden]="!isLogedIn">You are logged in</div>
-  <form [formGroup]="myForm" (ngSubmit)="onSubmit()" [hidden]="isLogedIn">
-    <div class="form-group">
-      <label for="email">E-Mail</label>
-      <input type="text" class="form-control" id="email" formControlName="email">
-      <div *ngIf="!myForm.get('email').valid">
-        Invalid Email
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" class="form-control" id="password" formControlName="password">
-    </div>
-    <button type="submit" mat-raised-button color="primary" [disabled]="!myForm.valid">Submit</button>
-</form>
-  `,
+  templateUrl: 'login.component.html',
   styles: [
   ]
 })
 export class LoginComponent implements OnInit {
-
+  hide = false
   myForm: FormGroup;
   isLogedIn: Boolean = false
   resultResponse: any
@@ -56,6 +39,14 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  getErrorMessage() {
+    if (this.myForm.get('email').hasError('required')) {
+      return 'You must enter a value';
+    }
+
+    return this.myForm.get('email').hasError('email') ? 'Not a valid email' : '';
+  }
 
   onSubmit() {
     this.authService.doPostLogin(this.myForm.value).subscribe(

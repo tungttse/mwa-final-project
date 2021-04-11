@@ -8,7 +8,7 @@ import {
 } from "@angular/forms";
 import { Observable, of } from "rxjs";
 import { map, catchError } from "rxjs/operators";
-import { AuthService } from './auth.service';
+import { AuthService } from './services/auth.service';
 import { StorageService } from './storage.service';
 
 @Component({
