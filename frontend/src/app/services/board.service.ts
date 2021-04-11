@@ -26,4 +26,8 @@ export class BoardService {
     return this.http.get(this.serverUrl +'/boards')
   }
 
+  getById(id) {
+    return this.http.get(this.serverUrl +'/boards/' + id)
+  }
+
 }

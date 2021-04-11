@@ -3,6 +3,8 @@ import { BoardService } from '../services/board.service'
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DragulaService } from "ng2-dragula";
 import { Subscription } from "rxjs";
+import {Router, ActivatedRoute, Params} from '@angular/router';
+
 @Component({
   selector: 'board-detail',
   templateUrl: 'board-detail.component.html',
@@ -10,91 +12,95 @@ import { Subscription } from "rxjs";
 })
 export class BoardDetailComponent implements OnInit {
   //TODO: add spiner state
-  content: String = "fetching..."
+  content: any = "fetching..."
 
-  //TODO: hardcode
-  public columns: Array<any> = [
-    {
-      name: 'Todo',
-      cards: [{ name: 'Item A' }, { name: 'Item B' }, { name: 'Item C' }, { name: 'Item D' }]
-    },
-    {
-      name: 'Doing',
-      cards: [{ name: 'Item 1' }, { name: 'Item 2' }, { name: 'Item 3' }, { name: 'Item 4' }]
-    },
+  public columns: Array<any> = [];
 
-    {
-      name: 'Verifying',
-      cards: [{ name: 'Item 1' }, { name: 'Item 2' }, { name: 'Item 3' }, { name: 'Item 4' }]
-    },
+  boardId: any
 
-    {
-      name: 'Done',
-      cards: [{ name: 'Item 1' }]
-    },
-  ];
 
   subs = new Subscription();
   constructor(
     private boardService: BoardService,
-    private dragulaService: DragulaService
+    private dragulaService: DragulaService,
+    private activatedRoute: ActivatedRoute
   ) {
 
+    this.boardId = this.activatedRoute.snapshot.paramMap.get('id');
+    
     this.dragulaService.createGroup("COLUMNS", {
       direction: 'horizontal',
       moves: (el, source, handle) => {
         return handle.className === "group-handle"
       }
     });
-
-    this.subs.add(this.dragulaService.dropModel("COLUMNS")
-      .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
-        console.log('dropModel:', el, source, target, sourceModel, targetModel, item);
-      })
-    );
-    this.subs.add(this.dragulaService.removeModel("COLUMNS")
-      .subscribe(({ el, source, item, sourceModel }) => {
-        console.log('removeModel:');
-        console.log(el);
-        console.log(source);
-        console.log(sourceModel);
-        console.log(item);
-      })
-    );
-
-    this.subs.add(this.dragulaService.drag("COLUMNS")
-      .subscribe(({ name, el, source }) => {
-        console.log("drag ", name, el, source)
-      })
-    );
-    this.subs.add(this.dragulaService.drop("COLUMNS")
-      .subscribe(({ name, el, target, source, sibling }) => {
-        console.log("drop ", name, el,target,  source, sibling)
-      })
-    );
-    
-
-    // You can also get all events, not limited to a particular group
+ 
     this.subs.add(this.dragulaService.drop()
       .subscribe(({ name, el, target, source, sibling }) => {
-        console.log("drop catch all ", name, el,target,  source, sibling)
+        // console.log("drop catch all ", el ,target, sibling)
+        if(el.getAttribute("id") == null) {
+          return false
+        }
+      
+        let targetColumnId = target.getAttribute('id')
+        console.log(target.childNodes)
+        console.log(targetColumnId)
+        // know add card and re - order all cards.
+
+        // know delete card from
+        //TODO: now can delete old card out of column
+        let oldCardOrder = el.getAttribute("order")
+        let movedCardId = el.getAttribute("id")
+        let sourceColumnId = el.getAttribute("data-colid")  
+        console.log(oldCardOrder, movedCardId, sourceColumnId)
       })
     );
 
+     this.subs.add(this.dragulaService.dropModel("COLUMNS")
+      .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
+        console.log('dropModel:',  targetModel, item);
+        //TODO: from targetModel, update again to the DB
+        /*
+        
+        */
+        
+      })
+    );
+    // this.subs.add(this.dragulaService.removeModel("COLUMNS")
+    //   .subscribe(({ el, source, item, sourceModel }) => {
+    //     console.log("removeModel", el, source, item, sourceModel);
+    //   })
+    // );
 
+    // this.subs.add(this.dragulaService.drag("COLUMNS")
+    //   .subscribe(({ name, el, source }) => {
+    //     console.log("drag ", name, el, source)
+    //   })
+    // );
+
+    // this.subs.add(this.dragulaService.drop("COLUMNS")
+    //   .subscribe(({ name, el, target, source, sibling }) => {
+    //     console.log("drop ", name, el,target,  source, sibling)
+    //   })
+    // );
   }
 
   ngOnInit(): void {
-    this.boardService.get().subscribe(
+    this.boardService.getById(this.boardId).subscribe(
       res => {
-        if (res['error']) {
+        if (!res ||res['error'] || res["_id"] == null || typeof res["_id"] === "undefined") {
           this.content = "Error " + res['error']
+          console.log('Error')
+        } else {
+          this.content = res
+          this.columns = res['columns']
+
         }
-        this.content = res['data']
       }
     )
   }
 
-
-
+  ngOnDestroy() {
+    this.subs.unsubscribe();
+  }
 }
