@@ -17,8 +17,9 @@ export class UserGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       if(this.storageService.token == null || this.storageService.token == "") {
-        if(this.router.url.indexOf('/protected')) {
-          this.router.navigateByUrl('/');
+        console.log(this.router.url)
+        if(this.router.url.indexOf('/boards')) {
+          this.router.navigateByUrl('/login');
           return false;
         }
       }

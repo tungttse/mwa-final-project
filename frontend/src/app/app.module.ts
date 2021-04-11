@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './auth/login.component';
 import { SignupComponent } from './auth/signup.component'
 import { Routes, RouterModule } from '@angular/router';
-import { ProtectedComponent } from './board/protected.component';
+import { BoardComponent } from './board/board.component';
 import { UserGuard } from './user.guard';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './token.interceptor';
@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'login' , component: LoginComponent },
   { path: 'signup' , component: SignupComponent },
   {
-    path: 'protected', component: ProtectedComponent, canActivate: [UserGuard]
+    path: 'boards/:id', component: BoardComponent, canActivate: [UserGuard]
   }
 ]
 @NgModule({
@@ -29,7 +29,7 @@ const routes: Routes = [
     AppComponent,
     LoginComponent,
     SignupComponent,
-    ProtectedComponent
+    BoardComponent
   ],
   imports: [
     BrowserModule,

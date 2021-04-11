@@ -1,22 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { ContentService } from '../services/content.service'
+import { BoardService } from '../services/board.service'
 
 @Component({
   selector: 'app-protected',
-  template: `
-    <p>
-      {{content}}
-    </p>
-  `,
+  templateUrl: 'board.component.html',
   styles: [
   ]
 })
-export class ProtectedComponent implements OnInit {
+export class BoardComponent implements OnInit {
   content: String = "fetching..."
-  constructor(private contentService: ContentService ) { }
+  constructor(private boardService: BoardService ) { }
 
   ngOnInit(): void {
-    this.contentService.get().subscribe(
+    this.boardService.get().subscribe(
       res => {
         console.log(res)
         if(res['error']) {

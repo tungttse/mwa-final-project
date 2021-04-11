@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const jwt = require('jsonwebtoken');
 const cors = require('cors')
+const fs = require('fs');
 const cookieParser = require('cookie-parser');
 require('dotenv').config()
 const { MongoClient } = require("mongodb");
@@ -10,7 +11,9 @@ let db;
 
 const usersRouter = require('./api/userRouters');
 const authRouter = require('./api/authRouters');
+const boardRouter = require('./api/boardRouters');
 
+const private_key = fs.readFileSync('./keys/private.key');
 
 function _mapDBCollection(req) {
     req.usersCollection = req.db.collection(process.env.DB_COLLECTION_USER)
@@ -37,6 +40,7 @@ app.use(cors())
 app.use(express.json());
 app.use(cookieParser());
 
+
 app.use((req, res, next) => {
     const whitelistRoutes = [
         '/api/auth/signup', 
@@ -54,6 +58,7 @@ app.use((req, res, next) => {
             jwt.verify(bearerToken, private_key);
             next();
         } catch (e) {
+            console.log(e)
             res.sendStatus(403);
         }
     } else {
@@ -64,6 +69,7 @@ app.use((req, res, next) => {
 // routers
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/boards', boardRouter);
 
 app.use('/*', (req, res) => {
     res.json({ data: 'no data' })
