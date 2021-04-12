@@ -12,7 +12,13 @@
                 <div dragula="COLUMNS" [(dragulaModel)]="columns" class="column-list">
                     <div class="container-column" *ngFor="let col of columns">
                         <div class="container-content-column">
-                            <span class="group-handle">{{col.name}}</span>
+                        <ng-container>
+                            <span *ngIf="!isEdited;else elseBlock " class="group-handle" (click)='edited()'>{{col.name}}</span> 
+                            <ng-template #elseBlock>
+                                <input onkeydown="apply(this)" *ngIf="inputAdded(); then thenBlock"/>
+                                    <ng-template #thenBlock></ng-template>
+                            </ng-template>
+                        </ng-container>
                             <div class="container" dragula="ITEMS1" [(dragulaModel)]="col.cards">
                                 <div class="card-box" *ngFor="let card of col.cards" [innerHtml]="card.name"></div>
                             </div>

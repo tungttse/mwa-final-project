@@ -11,6 +11,8 @@ import { Subscription } from "rxjs";
 export class BoardDetailComponent implements OnInit {
   //TODO: add spiner state
   content: String = "fetching..."
+  isEdited = false;
+  inputAdded = false;
 
   //TODO: hardcode
   public columns: Array<any> = [
@@ -95,6 +97,14 @@ export class BoardDetailComponent implements OnInit {
     )
   }
 
+  edited() {
+    this.isEdited = true;
+  }
+
+  apply(content) {
+    this.columns[0].name = content;
+    this.inputAdded = true;
+  }
 
 
 }
