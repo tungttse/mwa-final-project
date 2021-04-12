@@ -8,7 +8,6 @@ require('dotenv').config()
 const { MongoClient } = require("mongodb");
 const client = new MongoClient(process.env.DB_CONNECT_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 let db;
-
 const usersRouter = require('./api/userRouters');
 const authRouter = require('./api/authRouters');
 const boardRouter = require('./api/boardRouters');
@@ -24,7 +23,8 @@ function _mapDBCollection(req) {
 app.use((req, res, next) => {
     if (!db) {
         client.connect(function (err) {
-            req.db = client.db(process.env.DB_NAME);
+            db = client.db(process.env.DB_NAME)
+            req.db = db
             _mapDBCollection(req)
             next();
         });
