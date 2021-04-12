@@ -29,11 +29,7 @@ export class BoardComponent implements OnInit {
   }
 
   createNewBoard(event) {
-    console.log('new boad', event.target.value)
-
     this.userService.createNewBoard(event.target.value)
     .subscribe()
-
-
   }
 }
