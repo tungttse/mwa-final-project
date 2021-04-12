@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BoardService } from '../services/board.service'
+import { BoardDragDropService } from '../services/board-dragdrop.service'
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DragulaService } from "ng2-dragula";
 import { from, Subscription } from "rxjs";
@@ -22,7 +22,7 @@ export class BoardDetailComponent implements OnInit {
 
   subs = new Subscription();
   constructor(
-    private boardService: BoardService,
+    private boardDDService: BoardDragDropService,
     private dragulaService: DragulaService,
     private activatedRoute: ActivatedRoute
   ) {
@@ -61,7 +61,7 @@ export class BoardDetailComponent implements OnInit {
                 "card_id" : element.getAttribute('id')
               }
   
-              this.boardService.changeOrderCard(this.boardId, body)
+              this.boardDDService.changeOrderCard(this.boardId, body)
               .subscribe(re => console.log(re))
             } else {
               console.log('leuleu')
@@ -74,7 +74,7 @@ export class BoardDetailComponent implements OnInit {
         } else {
          
           // getinfo old card
-          this.boardService.getCardById(this.boardId, sourceColumnId, movedCardId).subscribe(cr => {
+          this.boardDDService.getCardById(this.boardId, sourceColumnId, movedCardId).subscribe(cr => {
             if(cr['columns']) {
               let foundedcol = _.filter(cr['columns'], col => {
                 return col._id == sourceColumnId
@@ -90,10 +90,10 @@ export class BoardDetailComponent implements OnInit {
                * update order of cards in column
                * delete old card at old column
               */
-              this.boardService.addCardToColumn(this.boardId, targetColumnId, card[0]).subscribe(ars => {
+              this.boardDDService.addCardToColumn(this.boardId, targetColumnId, card[0]).subscribe(ars => {
                 if(ars) {
                   this._updateOrderCard(targetColumnId, childNodes)
-                  this.boardService.deleteCardOutOfColumn(this.boardId, sourceColumnId, movedCardId).subscribe(dres => console.log(dres))
+                  this.boardDDService.deleteCardOutOfColumn(this.boardId, sourceColumnId, movedCardId).subscribe(dres => console.log(dres))
                 }
 
                 // delete old card
@@ -112,7 +112,7 @@ export class BoardDetailComponent implements OnInit {
            "column_id" : element._id,
            "new_order" : index + 1
          }
-         this.boardService.changeOrderColumn(this.boardId, body)
+         this.boardDDService.changeOrderColumn(this.boardId, body)
          .subscribe(re => console.log(re))
        }
       })
@@ -129,13 +129,13 @@ export class BoardDetailComponent implements OnInit {
         "card_id" : element.getAttribute('id')
       }
 
-      this.boardService.changeOrderCard(this.boardId, body)
+      this.boardDDService.changeOrderCard(this.boardId, body)
       .subscribe(re => console.log(re))
     }
   }
 
   ngOnInit(): void {
-    this.boardService.getById(this.boardId).subscribe(
+    this.boardDDService.getById(this.boardId).subscribe(
       res => {
         if (!res ||res['error'] || res["_id"] == null || typeof res["_id"] === "undefined") {
           this.content = "Error " + res['error']

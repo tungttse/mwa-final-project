@@ -7,7 +7,7 @@ router.get('/', function (req, res, next) {
   res.send('list boards');
 });
 
-router.get('/:id', function (req, res, next) {
+router.get('/dd/:id', function (req, res, next) {
   let boardId = req.params.id;
   new BoardServices(req.boardsCollection).findById(boardId)
     .then(serviceResp => {
@@ -18,7 +18,7 @@ router.get('/:id', function (req, res, next) {
     })
 });
 
-router.patch('/order/columns/:board_id', function (req, res, next) {
+router.patch('/dd/order/columns/:board_id', function (req, res, next) {
   let boardId = req.params.board_id;
   let data = req.body
   new BoardServices(req.boardsCollection).updateColumnOrder(boardId, data)
@@ -31,7 +31,7 @@ router.patch('/order/columns/:board_id', function (req, res, next) {
 });
 
 
-router.patch('/order/cards/:board_id', function (req, res, next) {
+router.patch('/dd/order/cards/:board_id', function (req, res, next) {
   let boardId = req.params.board_id;
   let data = req.body
   new BoardServices(req.boardsCollection).updateCardOrder(boardId, data)
@@ -43,7 +43,7 @@ router.patch('/order/cards/:board_id', function (req, res, next) {
     })
 });
 
-router.get('/cards/:board_id/:column_id/:card_id', (req, res) => {
+router.get('/dd/cards/:board_id/:column_id/:card_id', (req, res) => {
   let boardId = req.params.board_id;
   let columnId = req.params.column_id;
   let cardId = req.params.card_id;
@@ -57,7 +57,7 @@ router.get('/cards/:board_id/:column_id/:card_id', (req, res) => {
     })
 })
 
-router.post('/cards/:board_id/:column_id', (req, res) => {
+router.post('/dd/cards/:board_id/:column_id', (req, res) => {
   let boardId = req.params.board_id;
   let columnId = req.params.column_id;
   new BoardServices(req.boardsCollection).addCardToColumnDD(boardId, columnId, req.body)
@@ -70,7 +70,7 @@ router.post('/cards/:board_id/:column_id', (req, res) => {
 })
 
 
-router.delete('/cards/:board_id/:column_id/:card_id', (req, res) => {
+router.delete('/dd/cards/:board_id/:column_id/:card_id', (req, res) => {
   let boardId = req.params.board_id;
   let columnId = req.params.column_id;
   let cardId = req.params.card_id;
@@ -82,8 +82,5 @@ router.delete('/cards/:board_id/:column_id/:card_id', (req, res) => {
       res.json({ error: err })
     })
 })
-
-
-
 
 module.exports = router;

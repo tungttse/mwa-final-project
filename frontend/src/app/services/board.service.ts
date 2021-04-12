@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class BoardService {
   value: any;
-  private serverUrl="http://localhost:3000/api"
+  private serverUrl="http://localhost:3000/api/boards"
 
   constructor(private http: HttpClient,
     private route: ActivatedRoute) { 
@@ -19,33 +19,9 @@ export class BoardService {
         }
       });
     }
-
+    
   get(){
-    return this.http.get(this.serverUrl +'/boards')
-  }
-
-  getById(id) {
-    return this.http.get(this.serverUrl +'/boards/' + id)
-  }
-
-  getCardById(board_id, column_id, card_id) {
-    return this.http.get(this.serverUrl +`/boards/cards/${board_id}/${column_id}/${card_id}` )
-  }
-
-  changeOrderColumn(boardId, body) {
-    return this.http.patch(this.serverUrl +'/boards/order/columns/' + boardId, body)
-  }
-
-  changeOrderCard(boardId, body) {
-    return this.http.patch(this.serverUrl +'/boards/order/cards/' + boardId, body)
-  }
-
-  addCardToColumn(board_id, column_id, card_data) {
-    return this.http.post(this.serverUrl +`/boards/cards/${board_id}/${column_id}`, card_data )
-  }
-
-  deleteCardOutOfColumn(board_id, column_id, card_id) {
-    return this.http.delete(this.serverUrl +`/boards/cards/${board_id}/${column_id}/${card_id}` )
+    return this.http.get(this.serverUrl)
   }
 
 }
