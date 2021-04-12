@@ -13,6 +13,7 @@ const usersRouter = require('./api/userRouters');
 const authRouter = require('./api/authRouters');
 const boardRouter = require('./api/boardRouters');
 const cardRouter = require('./api/cardRouters');
+const columnRouter = require('./api/columnRouters');
 
 const private_key = fs.readFileSync('./keys/private.key');
 
@@ -72,6 +73,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/boards', boardRouter);
 app.use('/api/cards', cardRouter);
+app.use('/api/columns', columnRouter);
 
 app.use('/*', (req, res) => {
     res.json({ data: 'no data' })
