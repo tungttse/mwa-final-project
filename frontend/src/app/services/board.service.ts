@@ -8,22 +8,20 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class BoardService {
   value: any;
-  private serverUrl="http://localhost:3000/api"
+  private serverUrl="http://localhost:3000/api/boards"
 
   constructor(private http: HttpClient,
     private route: ActivatedRoute) { 
       this.route.params.subscribe(params => {
-
         if (params['id']) {
           this.value = params.id;
           console.log(this.value)
         }
-
       });
     }
-
+    
   get(){
-    return this.http.get(this.serverUrl +'/boards')
+    return this.http.get(this.serverUrl)
   }
 
 }

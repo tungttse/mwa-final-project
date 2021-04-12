@@ -8,6 +8,7 @@ require('dotenv').config()
 const { MongoClient } = require("mongodb");
 const client = new MongoClient(process.env.DB_CONNECT_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 let db;
+process.setMaxListeners(0);
 
 const usersRouter = require('./api/userRouters');
 const authRouter = require('./api/authRouters');

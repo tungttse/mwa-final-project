@@ -1,25 +1,30 @@
 <div>
+  <div class="container">
     <div class="container">
-        <div class="container">
-            <div class="info">Board name</div>
-            <div class="scroll-area">
-                <!-- <div cdkDropList cdkDropListOrientation="horizontal" class="column-list" (cdkDropListDropped)="drop($event)">
+      <div class="info">Board name</div>
+      <div class="scroll-area">
+        <!-- <div cdkDropList cdkDropListOrientation="horizontal" class="column-list" (cdkDropListDropped)="drop($event)">
                     <div class="card-box" *ngFor="let col of columns" cdkDrag>
                         <board-column name="{{col.name}}" [cards]="col.cards" cdkDrag></board-column>
                     </div>
                 </div> -->
 
-                <div dragula="COLUMNS" [(dragulaModel)]="columns" class="column-list">
-                    <div class="container-column" *ngFor="let col of columns">
-                        <div class="container-content-column">
-                            <span class="group-handle">{{col.name}}</span>
-                            <div class="container" dragula="ITEMS1" [(dragulaModel)]="col.cards">
-                                <div class="card-box" *ngFor="let card of col.cards" [innerHtml]="card.name"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div dragula="COLUMNS" [(dragulaModel)]="columns" class="column-list">
+          <div class="container-column" *ngFor="let col of columns">
+            <div class="container-content-column">
+              <span class="group-handle">{{col.name}}</span>
+              <div class="container" dragula="column_items" [attr.id]="col._id"  [(dragulaModel)]="col.cards">
+                <div class="card-box" 
+                  [attr.data-colid]="col._id" 
+                  [attr.id]="card._id" 
+                  [attr.title]="card.title"
+                  [attr.order]="card.order" 
+                  *ngFor="let card of col.cards" [innerHtml]="card.title"></div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
