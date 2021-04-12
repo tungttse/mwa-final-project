@@ -1,0 +1,18 @@
+<div>
+    <div class="container content-area">
+        <br>
+        <br>
+        <div class="container content-grid">
+        <mat-grid-list cols="3" rowHeight="2:3">
+          <div *ngFor="let board of boards">
+            <mat-grid-tile><a routerLink='/boards/{{board._id}}'>{{board.name}}</a></mat-grid-tile>
+          </div>
+          
+          <mat-grid-tile><input autofocus placeHolder="create new board" (keyup.enter)="createNewBoard($event)"/></mat-grid-tile>
+
+        </mat-grid-list>
+
+    
+        </div>
+    </div>
+</div>

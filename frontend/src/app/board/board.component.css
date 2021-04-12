@@ -1,11 +1,12 @@
 mat-grid-tile {
-    background: lightblue;
-    border : 1px solid rebeccapurple;
-    background-color: aquamarine;
-  }
-  
+  background: lightblue;
+  border: 1px solid rebeccapurple;
+  background-color: aquamarine;
+  cursor: pointer;
+  margin: 5px;
+}
 
-  .container {
-      max-width: 600px;
-
-  }
+.content-area {
+  margin: 0 auto;
+  max-width: 650px;
+}
