@@ -71,5 +71,38 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhYmNAZ21ha
 
 DELETE http://localhost:3000/api/cards/60737a89b8b2c431209c1c5c/607364016bd55069f43d0bd0/1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhYmNAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkeW02L3ZNdGZzNW1pdXhFYmJwWjI1T0dCUkg1QlNyUmVILzlTclRLT2R3UThHU3B5eFdRQk8iLCJpYXQiOjE2MTgxNzExMzB9.j4QFLq0pzf5uy_eNspg8cv8MvzhTw9D46_8sEmIxyAU
-###
 
+###  Add new column (http://localhost:3000/api/columns/:board_id)
+POST http://localhost:3000/api/columns/60735ffe1bbf604c9449a893
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhaG1hZEBob3RtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJEFsUkIyUC52ZGFRSXZvVDMwcy9xUGUxVVQzS3daWlZMM1R0eGlRLm80UVBPb2V4LklXeFAyIiwiaWF0IjoxNjE4MTczMTA3fQ.dsI8Ye4eZGz5M6fFPM3Qz0Q5iMpZ7J9pDs3djb2trK4
+
+ { 
+            "name": "TEST",
+            "order": 1,
+            "cards": [
+                {
+                    "_id": 3,
+                    "title": "doing homework 1",
+                    "order": 1,
+                    "description": "this is the content of a card",
+                    "label": "tag name",
+                    "column": "column_name",
+                    "board": "board_name",
+                    "deadline": "01/01/2022",
+                    "created_date": "01/01/2022",
+                    "updated_date": "01/01/2022"
+
+                }
+            ]
+}
+
+### Edit column name (http://localhost:3000/api/columns/:column_id/:board_id)
+PATCH http://localhost:3000/api/columns/60736b8cdfb65a3124376591/60735ffe1bbf604c9449a893
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhaG1hZEBob3RtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJEFsUkIyUC52ZGFRSXZvVDMwcy9xUGUxVVQzS3daWlZMM1R0eGlRLm80UVBPb2V4LklXeFAyIiwiaWF0IjoxNjE4MTczMTA3fQ.dsI8Ye4eZGz5M6fFPM3Qz0Q5iMpZ7J9pDs3djb2trK4
+{
+    "name" : "Name changed"
+}
+
+###

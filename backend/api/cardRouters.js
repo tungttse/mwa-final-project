@@ -72,7 +72,7 @@ router.patch('/:id/:board_id/:column_id', async function (req, res) {
       {
         arrayFilters:
           [
-            { 'columnsFilter._id': parseInt(req.params.column_id) },
+            { 'columnsFilter._id': new mongo.ObjectID(req.params.column_id) },
             { 'cardsFilter._id':   new mongo.ObjectID(req.params.id) }
           ]
       }
