@@ -38,6 +38,10 @@
                                         </span>
                                         <mat-error *ngIf="myForm.hasError('notSame')">Mismatch password</mat-error>
                                     </mat-form-field>
+
+                                <div class="signup-link">
+                                    <a routerLink="/login">Have account? Login Here</a>
+                                </div>
                                     
                                 <button type="submit" mat-raised-button color="primary"
                                     [disabled]="!myForm.valid">Submit</button>
