@@ -79,10 +79,7 @@ class UserServices {
   findByEmail(email) {
     return new Promise((resolve, reject) => {
       try {
-        this.dbCollection.updateOne(
-          { _id: email },
-          { $push: { "boards": {} } }
-        )
+        this.dbCollection.findOne({ _id: email })
           .then(rs => {
             if (rs) resolve(rs)
             else reject()

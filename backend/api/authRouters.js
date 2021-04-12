@@ -13,9 +13,9 @@ router.get('/', function(req, res) {
 
 router.post('/login', (req, res) => {
     // email as Id
-    let pass = req.body.password
     let email = req.body.email
-
+    let pass = req.body.password
+    
     new UserServices(req.usersCollection).findByEmail(email)
         .then(user => {
             bcrypt.compare(pass, user.password , function(err, result) {
