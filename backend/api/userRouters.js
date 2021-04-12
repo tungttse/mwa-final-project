@@ -17,4 +17,17 @@ router.get('/boards', function (req, res, next) {
     })
 });
 
+router.post('/boards', function (req, res) {
+  let userInfo = {
+    _id: req.current_user_email
+  }
+  new UserServices(req.usersCollection, req.boardsCollection).createNewBoard(req.body.name, userInfo)
+    .then(serviceResp => {
+      res.json(serviceResp)
+    })
+    .catch(err => {
+      res.json({ error: err })
+    })
+});
+
 module.exports = router;

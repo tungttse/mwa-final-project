@@ -1,6 +1,7 @@
 class UserServices {
-  constructor(collection) {
+  constructor(collection, boardCollection) {
     this.dbCollection = collection
+    this.dbBoardCollection = boardCollection
   }
 
   findBoardCurrenUser(uid) {
@@ -27,10 +28,61 @@ class UserServices {
     })
   }
 
+  createNewBoard(boardName, userInfo) {
+    return new Promise((resolve, reject) => {
+      try {
+        this.dbBoardCollection.insertOne(
+          {
+            "name" : boardName,
+            "user": userInfo,
+            "columns": [],
+            "created_date": new Date(),
+            "updated_date": new Date(),
+          }
+          )
+          .then(rs => {
+            console.log(rs)
+            if (rs) {
+              return new Promise((uresolve, ureject) => {
+                try {
+                  this.dbCollection.updateOne(
+                    { _id: userInfo._id },
+                    { $push: { "boards": {
+                      _id: rs.insertedId,
+                      name: boardName
+                    } } },
+                    )
+                    .then(urs => {
+                      console.log(urs)
+                      if (urs) {
+                        resolve(urs)
+                      } else {
+                        reject()
+                      }
+                    })
+          
+                } catch (e) {
+                  reject(e)
+                }
+              })
+            } else {
+              reject()
+            }
+          })
+
+      } catch (e) {
+        reject(e)
+      }
+    })
+  }
+
   findByEmail(email) {
     return new Promise((resolve, reject) => {
       try {
-        this.dbCollection.findOne({ _id: email })
+        this.dbCollection.updateOne(
+          { _id: email },
+          { $push: {"boards": {}} }
+          )
           .then(rs => {
             if (rs) {
               resolve(rs)

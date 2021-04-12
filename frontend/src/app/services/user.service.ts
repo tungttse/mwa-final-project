@@ -22,4 +22,8 @@ export class UserService {
   getListBoards(){
     return this.http.get(this.serverUrl + '/boards')
   }
+
+  createNewBoard(boardName){
+    return this.http.post(this.serverUrl + '/boards', {name : boardName})
+  }
 }

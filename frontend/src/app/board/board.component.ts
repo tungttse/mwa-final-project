@@ -11,7 +11,9 @@ import { UserService } from '../services/user.service'
 export class BoardComponent implements OnInit {
   content: String = "fetching..."
   boards: any
-  constructor(private userService: UserService ) { }
+  constructor(
+    private userService: UserService
+     ) { }
 
   ngOnInit(): void {
     this.userService.getListBoards().subscribe(
@@ -28,5 +30,10 @@ export class BoardComponent implements OnInit {
 
   createNewBoard(event) {
     console.log('new boad', event.target.value)
+
+    this.userService.createNewBoard(event.target.value)
+    .subscribe()
+
+
   }
 }
