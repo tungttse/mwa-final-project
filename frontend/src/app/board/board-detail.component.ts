@@ -5,6 +5,7 @@ import { DragulaService } from "ng2-dragula";
 import { from, Subscription } from "rxjs";
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import * as _ from 'underscore';
+
 @Component({
   selector: 'board-detail',
   templateUrl: 'board-detail.component.html',
@@ -55,14 +56,18 @@ export class BoardDetailComponent implements OnInit {
           // change order of cards in a column
           for (let index = 0; index < childNodes.length; index++) {
             const element = childNodes[index];
-            let body = {
-              "column_id" : targetColumnId,
-              "new_order" : index + 1,
-              "card_id" : element.getAttribute('id')
+            if(element.getAttribute('id')) {
+              let body = {
+                "column_id" : targetColumnId,
+                "new_order" : index + 1,
+                "card_id" : element.getAttribute('id')
+              }
+  
+              this.boardService.changeOrderCard(this.boardId, body)
+              .subscribe(re => console.log(re))
+            } else {
+              console.log('leuleu')
             }
-
-            this.boardService.changeOrderCard(this.boardId, body)
-            .subscribe(re => console.log(re))
           }
 
           // targetColumnId
@@ -71,8 +76,29 @@ export class BoardDetailComponent implements OnInit {
         } else {
           // move card to other column
           console.log('# column')
-          // delete old
-          // add new 
+          // getinfo old card
+          this.boardService.getCardById(this.boardId, sourceColumnId, movedCardId).subscribe(cr => {
+            if(cr['columns']) {
+              let foundedcol = _.filter(cr['columns'], col => {
+                return col._id == sourceColumnId
+              })
+
+              let card = _.filter(foundedcol[0].cards, cinfo => {
+                return cinfo._id == movedCardId
+              })
+
+              /**
+               * found moving card
+               * add to new column
+               * update order of cards in column
+               * delete old card at old column
+              */
+              this.boardService.addCardToColumn(this.boardId, targetColumnId, card[0]).subscribe(ars => {
+                // this._updateOrderCard(targetColumnId, childNodes)
+                // delete old card
+              })
+            }
+          })
         }
       })
     );
@@ -110,18 +136,29 @@ export class BoardDetailComponent implements OnInit {
     // );
   }
 
+  _updateOrderCard(targetColumnId, childNodes){
+    for (let index = 0; index < childNodes.length; index++) {
+      const element = childNodes[index];
+      let body = {
+        "column_id" : targetColumnId,
+        "new_order" : index + 1,
+        "card_id" : element.getAttribute('id')
+      }
+
+      this.boardService.changeOrderCard(this.boardId, body)
+      .subscribe(re => console.log(re))
+    }
+  }
+
   ngOnInit(): void {
     this.boardService.getById(this.boardId).subscribe(
       res => {
         if (!res ||res['error'] || res["_id"] == null || typeof res["_id"] === "undefined") {
           this.content = "Error " + res['error']
-          console.log('Error')
         } else {
           this.content = res
           res['columns'].forEach(element => {
-            console.log('before ',element.cards)
             element.cards = _.sortBy(element.cards, "order")
-            console.log("after" , element.cards)
           });
           this.columns = _.sortBy(res['columns'], "order")
         }

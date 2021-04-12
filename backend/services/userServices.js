@@ -9,7 +9,6 @@ class UserServices {
 				this.dbCollection.findOne({ _id: email })
 					.then(rs => {
 						if (rs) {
-							console.log('user ', rs)
 							resolve(rs)
 						} else {
 							reject()

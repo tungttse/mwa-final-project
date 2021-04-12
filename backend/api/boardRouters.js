@@ -44,4 +44,30 @@ router.patch('/order/cards/:board_id', function (req, res, next) {
     })
 });
 
+router.get('/cards/:board_id/:column_id/:card_id', (req, res) => {
+  let boardId = req.params.board_id;
+  let columnId = req.params.column_id;
+  let cardId = req.params.card_id;
+
+  new BoardServices(req.boardsCollection).findCardById(boardId, columnId, cardId)
+    .then(serviceResp => {
+      res.json(serviceResp)
+    })
+    .catch(err => {
+      res.json({ error: err })
+    })
+})
+
+router.post('/cards/:board_id/:column_id', (req, res) => {
+  let boardId = req.params.board_id;
+  let columnId = req.params.column_id;
+  new BoardServices(req.boardsCollection).addCardToColumnDD(boardId, columnId, req.body)
+    .then(serviceResp => {
+      res.json(serviceResp)
+    })
+    .catch(err => {
+      res.json({ error: err })
+    })
+})
+
 module.exports = router;
