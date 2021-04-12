@@ -36,6 +36,9 @@ export class SignupComponent {
       ], this.asyncEmailValidator.bind(this)],
       'password': ['',Validators.required],
       'repassword': ['',[Validators.required]],
+      'fname': ['', Validators.required],
+      'lname': ['', Validators.required],
+      'dob' :['', Validators.required],
     }, { validators: this.checkPasswords });
 
     this.myForm.valueChanges.subscribe(

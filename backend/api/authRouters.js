@@ -12,6 +12,7 @@ router.get('/', function(req, res) {
 });
 
 router.post('/login', (req, res) => {
+    // email as Id
     let pass = req.body.password
     let email = req.body.email
 
@@ -20,10 +21,16 @@ router.post('/login', (req, res) => {
             bcrypt.compare(pass, user.password , function(err, result) {
                 if(result == true) {
                     let token = jwt.sign({
-                        _id: email,
-                        password: user.password
+                        email: email 
                     }, private_key)
-                    res.json({ token: token })
+                    res.json({ token: token, userInfo : 
+                        { 
+                        email: user._id,
+                        first_name: user.first_name, 
+                        last_name: user.last_name, 
+                        gender: user.gender
+                    }
+                 })
                 } else {
                     res.json({error: 'invalid user'})
                 }
@@ -35,15 +42,20 @@ router.post('/login', (req, res) => {
 router.post('/signup', (req, res) => {
     let pass = req.body.password
     let email = req.body.email
+    let fname = req.body.fname
+    let lname = req.body.lname
+    let dob = req.body.dob
     
     bcrypt.hash(pass, parseInt(process.env.SALT_ROUND_HASH), function (errHash, hash) {
         new UserServices(req.usersCollection).insert(
-            { _id: email, password: hash }
+            {
+                _id: email, password: hash,
+                first_name: fname, last_name: lname, birth_date: dob
+            }
         )
         .then(serviceResp => {
             let token = jwt.sign({
-                _id: email,
-                password: hash
+                email: email
             }, private_key)
             res.json({ token: token })
         })

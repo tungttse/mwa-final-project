@@ -38,20 +38,15 @@ export class BoardDetailComponent implements OnInit {
         }
       });
     } catch(e){}
-    
  
     this.subs.add(this.dragulaService.drop()
       .subscribe(({ name, el, target, source, sibling }) => {
-        console.log("drop catch all ", el ,target, sibling)
         if(el.getAttribute("id") == null) {
           return false
         }
       
         let targetColumnId = target.getAttribute('id')
         let childNodes = target.children
-        
-       
-        let oldCardOrder = el.getAttribute("order")
         let movedCardId = el.getAttribute("id")
         let sourceColumnId = el.getAttribute("data-colid")  
     
@@ -68,9 +63,8 @@ export class BoardDetailComponent implements OnInit {
   
               this.boardDDService.changeOrderCard(this.boardId, body)
               .subscribe(re => console.log(re))
-            } else {
-              console.log('leuleu')
-            }
+            } 
+            
           }
 
           // targetColumnId
@@ -100,7 +94,6 @@ export class BoardDetailComponent implements OnInit {
                   this._updateOrderCard(targetColumnId, childNodes)
                   this.boardDDService.deleteCardOutOfColumn(this.boardId, sourceColumnId, movedCardId).subscribe(dres => console.log(dres))
                 }
-
                 // delete old card
               })
             }

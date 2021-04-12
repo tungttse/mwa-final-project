@@ -6,17 +6,24 @@ import { ActivatedRoute } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class BoardService {
+export class UserService {
   value: any;
-  private serverUrl="http://localhost:3000/api/boards"
+  private serverUrl="http://localhost:3000/api/users"
 
   constructor(private http: HttpClient,
     private route: ActivatedRoute) { 
       this.route.params.subscribe(params => {
         if (params['id']) {
           this.value = params.id;
-          console.log(this.value)
         }
       });
     }
+    
+  getListBoards(){
+    return this.http.get(this.serverUrl + '/boards')
+  }
+
+  createNewBoard(boardName){
+    return this.http.post(this.serverUrl + '/boards', {name : boardName})
+  }
 }
