@@ -42,10 +42,16 @@ router.post('/login', (req, res) => {
 router.post('/signup', (req, res) => {
     let pass = req.body.password
     let email = req.body.email
+    let fname = req.body.fname
+    let lname = req.body.lname
+    let dob = req.body.dob
     
     bcrypt.hash(pass, parseInt(process.env.SALT_ROUND_HASH), function (errHash, hash) {
         new UserServices(req.usersCollection).insert(
-            { _id: email, password: hash }
+            {
+                _id: email, password: hash,
+                first_name: fname, last_name: lname, birth_date: dob
+            }
         )
         .then(serviceResp => {
             let token = jwt.sign({
