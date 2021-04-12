@@ -122,7 +122,6 @@ export class BoardDetailComponent implements OnInit {
        }
       })
     );
-    
   }
 
   _updateOrderCard(targetColumnId, childNodes){
@@ -159,13 +158,17 @@ export class BoardDetailComponent implements OnInit {
     this.subs.unsubscribe();
   }
 
-  edited() {
-    this.isEdited = true;
+  edited(col) {
+    col.isEdited = true;
   }
 
-  apply(content) {
-    this.columns[0].name = content;
-    this.inputAdded = true;
-  }
+  onEnter(event, col) {
+    console.log(event.target.value)
+    let newColumnName = event.target.value
+    //TODO: call api to update name column here
+    // then set in the callback like bellow
 
+    col.isEdited = false;
+    col.name = newColumnName
+  }
 }
