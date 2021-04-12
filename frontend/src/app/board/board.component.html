@@ -5,9 +5,13 @@
         <div class="container content-grid">
         <mat-grid-list cols="3" rowHeight="3:2">
           <div *ngFor="let board of boards">
-            <mat-grid-tile><a routerLink='/boards/{{board._id}}'>{{board.name}}</a></mat-grid-tile>
+            <mat-grid-tile>
+                <mat-icon class="edit-icon" (click)="onEdit(board)">edit</mat-icon>
+                <mat-icon (click)="onDelete(board)">delete_forever</mat-icon>
+                <a routerLink='/boards/{{board._id}}'>{{board.name}}</a>
+            </mat-grid-tile>
           </div>
-
+          
           <mat-grid-tile><input autofocus placeHolder="create new board" (keyup.enter)="createNewBoard($event)"/></mat-grid-tile>
 
         </mat-grid-list>

@@ -22,3 +22,14 @@ mat-grid-tile:hover {
     opacity: 1;
 }
 
+.mat-icon{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 20px;
+    width: 15px;
+    height: 15px;
+}
+.edit-icon{
+    right: 25px;
+}

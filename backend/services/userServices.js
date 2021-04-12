@@ -10,9 +10,7 @@ class UserServices {
         this.dbCollection.findOne(
           { _id: uid },
           {
-            projection: {
-              password: 0
-            }
+            projection: { password: 0 }
           }
         )
           .then(rs => {

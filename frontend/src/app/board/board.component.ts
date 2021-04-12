@@ -37,4 +37,14 @@ export class BoardComponent implements OnInit {
       event.target.value = ""
     })
   }
+
+  onDelete(board) {
+    console.log(board);
+
+  }
+
+  onEdit(board) {
+    console.log(board);
+
+  }
 }
