@@ -58,6 +58,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhaG1hZEBob
     "name" : "Name changed"
 }
 
+### Delete column (http://localhost:3000/api/columns/:column_id/:board_id)
+DELETE  http://localhost:3000/api/columns/60736b8cdfb65a3124376591/60735ffe1bbf604c9449a893
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhaG1hZEBob3RtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJEFsUkIyUC52ZGFRSXZvVDMwcy9xUGUxVVQzS3daWlZMM1R0eGlRLm80UVBPb2V4LklXeFAyIiwiaWF0IjoxNjE4MTczMTA3fQ.dsI8Ye4eZGz5M6fFPM3Qz0Q5iMpZ7J9pDs3djb2trK4
+
 ###
 GET http://localhost:3000/api/protected
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhaG1hZEBob3RtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJEFsUkIyUC52ZGFRSXZvVDMwcy9xUGUxVVQzS3daWlZMM1R0eGlRLm80UVBPb2V4LklXeFAyIiwiaWF0IjoxNjE4MTczMTA3fQ.dsI8Ye4eZGz5M6fFPM3Qz0Q5iMpZ7J9pDs3djb2trK4
