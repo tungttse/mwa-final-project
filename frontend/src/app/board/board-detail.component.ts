@@ -44,10 +44,8 @@ export class BoardDetailComponent implements OnInit {
       
         let targetColumnId = target.getAttribute('id')
         let childNodes = target.children
-        console.log("target.childNodes ",target.childNodes)
+        
        
-        // know delete card from
-        //TODO: now can delete old card out of column
         let oldCardOrder = el.getAttribute("order")
         let movedCardId = el.getAttribute("id")
         let sourceColumnId = el.getAttribute("data-colid")  
@@ -74,8 +72,7 @@ export class BoardDetailComponent implements OnInit {
           // boardid
           // 
         } else {
-          // move card to other column
-          console.log('# column')
+         
           // getinfo old card
           this.boardService.getCardById(this.boardId, sourceColumnId, movedCardId).subscribe(cr => {
             if(cr['columns']) {
@@ -94,7 +91,11 @@ export class BoardDetailComponent implements OnInit {
                * delete old card at old column
               */
               this.boardService.addCardToColumn(this.boardId, targetColumnId, card[0]).subscribe(ars => {
-                // this._updateOrderCard(targetColumnId, childNodes)
+                if(ars) {
+                  this._updateOrderCard(targetColumnId, childNodes)
+                  this.boardService.deleteCardOutOfColumn(this.boardId, sourceColumnId, movedCardId).subscribe(dres => console.log(dres))
+                }
+
                 // delete old card
               })
             }
@@ -117,23 +118,6 @@ export class BoardDetailComponent implements OnInit {
       })
     );
     
-    // this.subs.add(this.dragulaService.removeModel("COLUMNS")
-    //   .subscribe(({ el, source, item, sourceModel }) => {
-    //     console.log("removeModel", el, source, item, sourceModel);
-    //   })
-    // );
-
-    // this.subs.add(this.dragulaService.drag("COLUMNS")
-    //   .subscribe(({ name, el, source }) => {
-    //     console.log("drag ", name, el, source)
-    //   })
-    // );
-
-    // this.subs.add(this.dragulaService.drop("COLUMNS")
-    //   .subscribe(({ name, el, target, source, sibling }) => {
-    //     console.log("drop ", name, el,target,  source, sibling)
-    //   })
-    // );
   }
 
   _updateOrderCard(targetColumnId, childNodes){

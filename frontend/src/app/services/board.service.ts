@@ -43,4 +43,9 @@ export class BoardService {
   addCardToColumn(board_id, column_id, card_data) {
     return this.http.post(this.serverUrl +`/boards/cards/${board_id}/${column_id}`, card_data )
   }
+
+  deleteCardOutOfColumn(board_id, column_id, card_id) {
+    return this.http.delete(this.serverUrl +`/boards/cards/${board_id}/${column_id}/${card_id}` )
+  }
+
 }

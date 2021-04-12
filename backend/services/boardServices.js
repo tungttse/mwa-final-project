@@ -130,6 +130,33 @@ class BoardServices {
       }
     })
   }
+
+  deleteCardOutOfColumn(board_id, column_id, card_id) {
+    return new Promise((resolve, reject) => {
+      try {
+        this.dbCollection.updateOne(
+          {
+            _id: board_id,
+            "columns._id": column_id
+          },
+          {
+            $pull: { "columns.$.cards" : {
+              "_id" : card_id
+            }}
+          }
+        )
+          .then(rs => {
+            if (rs) {
+              resolve(rs)
+            } else {
+              reject()
+            }
+          })
+      } catch (e) {
+        reject(e)
+      }
+    })
+  }
 };
 
 module.exports = BoardServices
