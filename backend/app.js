@@ -8,11 +8,11 @@ require('dotenv').config()
 const { MongoClient } = require("mongodb");
 const client = new MongoClient(process.env.DB_CONNECT_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 let db;
-process.setMaxListeners(0);
-
 const usersRouter = require('./api/userRouters');
 const authRouter = require('./api/authRouters');
 const boardRouter = require('./api/boardRouters');
+const cardRouter = require('./api/cardRouters');
+const columnRouter = require('./api/columnRouters');
 
 const private_key = fs.readFileSync('./keys/private.key');
 
@@ -24,7 +24,8 @@ function _mapDBCollection(req) {
 app.use((req, res, next) => {
     if (!db) {
         client.connect(function (err) {
-            req.db = client.db(process.env.DB_NAME);
+            db = client.db(process.env.DB_NAME)
+            req.db = db
             _mapDBCollection(req)
             next();
         });
@@ -71,6 +72,8 @@ app.use((req, res, next) => {
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/boards', boardRouter);
+app.use('/api/cards', cardRouter);
+app.use('/api/columns', columnRouter);
 
 app.use('/*', (req, res) => {
     res.json({ data: 'no data' })
