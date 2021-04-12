@@ -8,29 +8,42 @@
             </div>
 
             <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
-                <ul fxLayout fxLayoutGap="20px" class="navigation-items">
-
+                <ul fxLayout fxLayoutGap="20px" class="navigation-items"  *ngIf="(userInfo$ | async) || userInfoData; else other_content">>
                     <li>
                         <a routerLink="/boards/123" class="name-text">
                             <mat-icon class="icon">input</mat-icon>
-                            <span class="label">Board123</span>
+                            <span class="label">Boards</span>
                         </a>
                     </li>
-
                     <li>
-                        <a routerLink="/login" class="name-text">
-                            <mat-icon class="icon">home</mat-icon>
-                            <span class="label">Login</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a routerLink="/signup" class="name-text">
+                        <a routerLink="/logout" class="name-text">
                             <mat-icon class="icon">input</mat-icon>
-                            <span class="label">Signup</span>
+                            <span class="label">Logout</span>
                         </a>
                     </li>
                 </ul>
+
+                <ng-template #other_content>
+                    <ul fxLayout fxLayoutGap="20px" class="navigation-items"  *ngIf="(userInfo$ | async) || userInfoData">>
+                        <li>
+                            <a routerLink="/login" class="name-text">
+                                <mat-icon class="icon">home</mat-icon>
+                                <span class="label">Login</span>
+                            </a>
+                        </li>
+        
+                        <li>
+                            <a routerLink="/signup" class="name-text">
+                                <mat-icon class="icon">input</mat-icon>
+                                <span class="label">Signup</span>
+                            </a>
+                        </li>
+                    </ul>
+                </ng-template>
+
+
+                
+
             </div>
         </mat-toolbar>
         <main>

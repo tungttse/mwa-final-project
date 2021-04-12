@@ -23,7 +23,15 @@ router.post('/login', (req, res) => {
                         _id: email,
                         password: user.password
                     }, private_key)
-                    res.json({ token: token })
+                    // res.json({ token: token})
+                    res.json({ token: token, userInfo : 
+                        { 
+                        email: user._id,
+                        first_name: user.first_name, 
+                        last_name: user.last_name, 
+                        gender: user.gender
+                    }
+                 })
                 } else {
                     res.json({error: 'invalid user'})
                 }
