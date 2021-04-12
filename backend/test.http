@@ -3,7 +3,7 @@ POST http://localhost:3000/api/auth/login
 content-type: application/json
 
 {
-    "email":"abc@gmail.com",
+    "email":"ahmad@hotmail.com",
     "password":"123456"
 }
 
@@ -24,8 +24,96 @@ content-type: application/json
     "email":"abc@gmail.com"
 }
 
+###  Add new column (http://localhost:3000/api/columns/:board_id)
+POST http://localhost:3000/api/columns/60735ffe1bbf604c9449a893
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhaG1hZEBob3RtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJEFsUkIyUC52ZGFRSXZvVDMwcy9xUGUxVVQzS3daWlZMM1R0eGlRLm80UVBPb2V4LklXeFAyIiwiaWF0IjoxNjE4MTczMTA3fQ.dsI8Ye4eZGz5M6fFPM3Qz0Q5iMpZ7J9pDs3djb2trK4
+    
+ { 
+            "name": "TEST",
+            "order": 1,
+            "cards": [
+                {
+                    "_id": 3,
+                    "title": "doing homework 1",
+                    "order": 1,
+                    "description": "this is the content of a card",
+                    "label": "tag name",
+                    "column": "column_name",
+                    "board": "board_name",
+                    "deadline": "01/01/2022",
+                    "created_date": "01/01/2022",
+                    "updated_date": "01/01/2022"
+                    
+                }
+            ]
+}
+
+
 
 ###
 GET http://localhost:3000/api/protected
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiY0BnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRUZFhsb0hXOWFzN0VSVkR1VU40ell1aEpPaEpMQ1BBeHp1OVY0OWp3OFRqblhwbHRRYUJWMiIsImlhdCI6MTYxNzkzNzg0OX0.x5XENQYoDX9EagVevI2zZrTr0CsIhppNaIHh8r75Ra0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhaG1hZEBob3RtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJEFsUkIyUC52ZGFRSXZvVDMwcy9xUGUxVVQzS3daWlZMM1R0eGlRLm80UVBPb2V4LklXeFAyIiwiaWF0IjoxNjE4MTczMTA3fQ.dsI8Ye4eZGz5M6fFPM3Qz0Q5iMpZ7J9pDs3djb2trK4
 
+
+###  
+POST http://localhost:3000/api/boards
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhaG1hZEBob3RtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJEFsUkIyUC52ZGFRSXZvVDMwcy9xUGUxVVQzS3daWlZMM1R0eGlRLm80UVBPb2V4LklXeFAyIiwiaWF0IjoxNjE4MTczMTA3fQ.dsI8Ye4eZGz5M6fFPM3Qz0Q5iMpZ7J9pDs3djb2trK4
+
+{
+    "name": "board_name",
+    "user": {
+        "_id": 1,
+        "email":"abc@gmail.com",
+        "first_name":"F",
+        "last_name": "L"
+    },
+    "columns": [
+        {
+            "_id" : 1,
+            "name": "column_name",
+            "order": 1,
+            "cards": [
+                {
+                    "_id": 3,
+                    "title": "doing homework 1",
+                    "order": 1,
+                    "description": "this is the content of a card",
+                    "label": "tag name",
+                    "column": "column_name",
+                    "board": "board_name",
+                    "deadline": "01/01/2022",
+                    "created_date": "01/01/2022",
+                    "updated_date": "01/01/2022"
+                    
+                }
+            ]
+        },
+
+        {
+            "_id" : 2,
+            "name": "column_name2",
+            "order": 2,
+            "cards": [
+                {
+                    "_id": 2,
+                    "title": "doing homework 1",
+                    "order": 1,
+                    "description": "this is the content of a card",
+                    "label": "tag name",
+                    "column": "column_name",
+                    "board": "board_name",
+                    "deadline": "01/01/2022",
+                    "created_date": "01/01/2022",
+                    "updated_date": "01/01/2022"
+                    
+                }
+            ]
+        }
+
+    ]
+}
+
+###​
+  
