@@ -27,13 +27,15 @@ export class BoardDetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.boardId = this.activatedRoute.snapshot.paramMap.get('id');
+    try{
+      this.dragulaService.createGroup("COLUMNS", {
+        direction: 'horizontal',
+        moves: (el, source, handle) => {
+          return handle.className === "group-handle"
+        }
+      });
+    } catch(e){}
     
-    this.dragulaService.createGroup("COLUMNS", {
-      direction: 'horizontal',
-      moves: (el, source, handle) => {
-        return handle.className === "group-handle"
-      }
-    });
  
     this.subs.add(this.dragulaService.drop()
       .subscribe(({ name, el, target, source, sibling }) => {
