@@ -3,7 +3,7 @@
         <br>
         <br>
         <div class="container content-grid">
-        <mat-grid-list cols="3" rowHeight="2:3">
+        <mat-grid-list cols="3" rowHeight="3:2">
           <div *ngFor="let board of boards">
             <mat-grid-tile><a routerLink='/boards/{{board._id}}'>{{board.name}}</a></mat-grid-tile>
           </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BoardService } from '../services/board.service'
+import { DataSharingService } from '../services/data-sharing-service.service';
 
 import { UserService } from '../services/user.service'
 
@@ -12,7 +13,8 @@ export class BoardComponent implements OnInit {
   content: String = "fetching..."
   boards: any
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private dataSharingService: DataSharingService
      ) { }
 
   ngOnInit(): void {
@@ -30,6 +32,9 @@ export class BoardComponent implements OnInit {
 
   createNewBoard(event) {
     this.userService.createNewBoard(event.target.value)
-    .subscribe()
+    .subscribe(res => {
+      this.dataSharingService.userCreatedNewBoard.next(this.boards.push(res));
+      event.target.value = ""
+    })
   }
 }

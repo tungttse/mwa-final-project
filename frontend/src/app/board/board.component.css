@@ -3,10 +3,22 @@ mat-grid-tile {
   border: 1px solid rebeccapurple;
   background-color: aquamarine;
   cursor: pointer;
-  margin: 5px;
+  border-radius: 10px;
+  margin: 10px 0;
+
+  opacity: .7;
+transition: opacity .5s ease-out;
+-moz-transition: opacity .5s ease-out;
+-webkit-transition: opacity .5s ease-out;
+-o-transition: opacity .5s ease-out;
 }
 
 .content-area {
   margin: 0 auto;
   max-width: 650px;
 }
+
+mat-grid-tile:hover {
+    opacity: 1;
+}
+

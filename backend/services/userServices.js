@@ -56,7 +56,10 @@ class UserServices {
                     },
                   )
                     .then(urs => {
-                      if (urs) resolve(urs)
+                      if (urs) resolve({
+                        "_id": rs.insertedId,
+                        "name": boardName
+                      })
                       else reject()
                     })
 
