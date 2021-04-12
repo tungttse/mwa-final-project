@@ -97,11 +97,10 @@
 
             <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
                 <ul fxLayout fxLayoutGap="20px" class="navigation-items"
-                    *ngIf="((userInfo$ | async) || userInfoData); else other_content">>
+                    *ngIf="((userInfo$ | async) || userInfoData); else other_content">
                     <li>
                         <a routerLink="/boards/123" class="name-text">
-                            <mat-icon class="icon">input</mat-icon>
-                            <span class="label">Boards</span>
+                            <span class="label">Hardcode Board 123 for test</span>
                         </a>
                     </li>
                     <li>

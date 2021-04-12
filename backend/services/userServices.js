@@ -3,6 +3,30 @@ class UserServices {
     this.dbCollection = collection
   }
 
+  findBoardCurrenUser(uid) {
+    return new Promise((resolve, reject) => {
+      try {
+        this.dbCollection.findOne(
+          { _id: uid },
+          {
+            projection: {
+              password: 0
+            }
+          }
+        )
+          .then(rs => {
+            if (rs) {
+              resolve(rs)
+            } else {
+              reject()
+            }
+          })
+      } catch (e) {
+        reject(e)
+      }
+    })
+  }
+
   findByEmail(email) {
     return new Promise((resolve, reject) => {
       try {

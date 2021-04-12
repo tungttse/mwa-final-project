@@ -23,6 +23,7 @@ import {MaterialModule} from './material.module';
 import { DragulaModule } from 'ng2-dragula';
 
 const routes: Routes = [
+  { path: '' , component: BoardComponent },
   { path: 'login' , component: LoginComponent },
   { path: 'signup' , component: SignupComponent },
   { path: 'logout' , component: LogoutComponent },

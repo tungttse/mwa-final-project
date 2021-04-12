@@ -12,6 +12,7 @@ router.get('/', function(req, res) {
 });
 
 router.post('/login', (req, res) => {
+    // email as Id
     let pass = req.body.password
     let email = req.body.email
 
@@ -20,10 +21,8 @@ router.post('/login', (req, res) => {
             bcrypt.compare(pass, user.password , function(err, result) {
                 if(result == true) {
                     let token = jwt.sign({
-                        _id: email,
-                        password: user.password
+                        email: email 
                     }, private_key)
-                    // res.json({ token: token})
                     res.json({ token: token, userInfo : 
                         { 
                         email: user._id,
@@ -50,8 +49,7 @@ router.post('/signup', (req, res) => {
         )
         .then(serviceResp => {
             let token = jwt.sign({
-                _id: email,
-                password: hash
+                email: email
             }, private_key)
             res.json({ token: token })
         })

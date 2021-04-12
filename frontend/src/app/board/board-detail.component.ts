@@ -35,7 +35,6 @@ export class BoardDetailComponent implements OnInit {
         }
       });
     } catch(e){}
-    
  
     this.subs.add(this.dragulaService.drop()
       .subscribe(({ name, el, target, source, sibling }) => {
