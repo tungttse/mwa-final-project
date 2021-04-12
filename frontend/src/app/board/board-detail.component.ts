@@ -13,7 +13,10 @@ import * as _ from 'underscore';
 })
 export class BoardDetailComponent implements OnInit {
   //TODO: add spiner state
-  content: any = "fetching..."
+
+  content: any
+  isEdited = false;
+  inputAdded = false;
 
   public columns: Array<any> = [];
 
@@ -148,4 +151,14 @@ export class BoardDetailComponent implements OnInit {
   ngOnDestroy() {
     this.subs.unsubscribe();
   }
+
+  edited() {
+    this.isEdited = true;
+  }
+
+  apply(content) {
+    this.columns[0].name = content;
+    this.inputAdded = true;
+  }
+
 }
