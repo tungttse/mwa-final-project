@@ -16,6 +16,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 export class BoardComponent implements OnInit {
   content: String = ""
   timeHandler: any
+  loadingTimeOut: any
   boards: any = []
   constructor(
     private userService: UserService,
@@ -34,7 +35,9 @@ export class BoardComponent implements OnInit {
         }
         this.content = res['data']
         this.boards = res['boards']
-        this.spinner.hide();
+        this.loadingTimeOut = setTimeout(()=> {
+          this.spinner.hide();
+        }, 500)
       }
     )
   }
@@ -46,7 +49,11 @@ export class BoardComponent implements OnInit {
 
     this.userService.createNewBoard(event.target.value)
     .subscribe(res => {
-      this.dataSharingService.userCreatedNewBoard.next(this.boards.push(res));
+      if(this.boards) {
+        this.boards.push(res)
+      } else {
+        this.boards = [res]
+      }
       event.target.value = ""
     })
   }
@@ -97,6 +104,7 @@ export class BoardComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    clearInterval(this.timeHandler)
+    clearTimeout(this.timeHandler)
+    clearTimeout(this.loadingTimeOut)
   }
 }

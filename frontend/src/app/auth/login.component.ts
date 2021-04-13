@@ -9,6 +9,7 @@ import { AuthService } from '../services/auth.service';
 import { StorageService } from '../services/storage.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-login',
   templateUrl: 'login.component.html',
@@ -24,6 +25,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private toastr: ToastrService,
+    private spinner: NgxSpinnerService,
     private storageService: StorageService
     ) { 
     
@@ -50,6 +52,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.spinner.show()
     this.authService.doPostLogin(this.myForm.value).subscribe(
       res => {
         if(res['error']) {
@@ -58,6 +61,7 @@ export class LoginComponent implements OnInit {
           this.storageService.token = res['token']
           this.authService.userInfo = res['userInfo']
           this.isLogedIn = true
+          this.spinner.hide()
           this.router.navigateByUrl('/boards');
         }
       }

@@ -20,6 +20,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 export class BoardDetailComponent implements OnInit {
   content: any
   editTimeOut: any
+  loadingTimeOut: any
   isEdited = false
   inputAdded = false
   boardName: String
@@ -134,7 +135,10 @@ export class BoardDetailComponent implements OnInit {
           });
           this.columns = _.sortBy(res['columns'], "order")
           this.boardName = res['name']
-          this.spinner.hide();
+          this.loadingTimeOut = setTimeout(()=> {
+            this.spinner.hide();
+          }, 500)
+          
         }
       }
     )
@@ -155,7 +159,8 @@ export class BoardDetailComponent implements OnInit {
 
   ngOnDestroy() {
     this.subs.unsubscribe();
-    clearInterval(this.editTimeOut)
+    clearTimeout(this.editTimeOut)
+    clearTimeout(this.loadingTimeOut)
   }
 
   edited(col) {
