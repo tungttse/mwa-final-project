@@ -7,7 +7,7 @@ import { BoardDragDropService } from '../services/board-dragdrop.service'
   selector: 'edit-card',
   template: `
   <form [formGroup] = "edit_card" (ngSubmit)="onSubmit()">
-    <lable>Card name:</label>
+    <label>Card name:</label>
     <input type="text" name="name" formControlName = 'name'>
     <label>Description</label>
     <input type="text" name="description" formControlName = 'description'>
@@ -40,7 +40,7 @@ export class EditCardComponent implements OnInit {
   }
 
   onSubmit(){
-    this.boardDDService.editCard();
+    // this.boardDDService.editCard();
   }
 
   ngOnInit(): void {
