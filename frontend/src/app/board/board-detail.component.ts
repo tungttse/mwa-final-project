@@ -155,10 +155,14 @@ export class BoardDetailComponent implements OnInit {
 
   ngOnDestroy() {
     this.subs.unsubscribe();
+    clearInterval(this.editTimeOut)
   }
 
   edited(col) {
     col.isEdited = true;
+    this.editTimeOut = setTimeout(() => {
+      col.isEdited = false
+    }, 10000)
   }
 
   // Update cloumn name

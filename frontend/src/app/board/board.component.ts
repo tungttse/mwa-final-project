@@ -14,6 +14,7 @@ import * as _ from 'underscore';
 })
 export class BoardComponent implements OnInit {
   content: String = "fetching..."
+  timeHandler: any
   boards: any = []
   constructor(
     private userService: UserService,
@@ -69,6 +70,9 @@ export class BoardComponent implements OnInit {
 
   onEdit(board) {
     board.isEdited = true
+    this.timeHandler = setTimeout(() => {
+      board.isEdited = false
+    }, 10000)
   }
 
   editBoardName(event, board) {
@@ -77,7 +81,6 @@ export class BoardComponent implements OnInit {
       board.isEdited = false;
       return false
     }
-
     if(newName === board.name) {
       board.isEdited = false;
       return false
@@ -91,5 +94,6 @@ export class BoardComponent implements OnInit {
   }
 
   ngOnDestroy() {
+    clearInterval(this.timeHandler)
   }
 }

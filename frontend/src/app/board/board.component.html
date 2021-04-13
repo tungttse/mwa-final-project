@@ -10,9 +10,6 @@
               <div class="board-item">
                 <mat-icon class="edit-icon" (click)="onEdit(board)">edit</mat-icon>
                 <mat-icon (click)="onDelete(board)">delete_forever</mat-icon>
-               
-
-
                 <div>
                   <span *ngIf="!board.isEdited;else elseBlock " class="group-handle"
                     (click)='onEdit(board)'>
