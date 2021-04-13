@@ -17,6 +17,7 @@ export class BoardComponent implements OnInit {
   boards: any = []
   constructor(
     private userService: UserService,
+    private boardService: BoardService,
     private dataSharingService: DataSharingService,
     private dialog: MatDialog
      ) { }
@@ -67,8 +68,23 @@ export class BoardComponent implements OnInit {
   }
 
   onEdit(board) {
-    console.log(board);
-
+    board.isEdited = true
   }
 
+  editBoardName(event, board) {
+    let newName = event.target.value
+    if(newName === board.name) {
+      board.isEdited = false;
+      return false
+    }
+    let boardId = board._id
+    this.boardService.editBoard(boardId, newName).
+      subscribe(re => {
+        board.isEdited = false;
+        board.name = newName
+      })
+  }
+
+  ngOnDestroy() {
+  }
 }

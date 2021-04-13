@@ -155,15 +155,10 @@ export class BoardDetailComponent implements OnInit {
 
   ngOnDestroy() {
     this.subs.unsubscribe();
-    clearTimeout(this.editTimeOut)
   }
 
   edited(col) {
     col.isEdited = true;
-
-    this.editTimeOut = setTimeout(() => {
-      col.isEdited = false;
-    }, 5000)
   }
 
   // Update cloumn name
@@ -195,8 +190,7 @@ export class BoardDetailComponent implements OnInit {
       if (result === true) {
         let cardIdForDelete = card._id
         console.log('good to remove ', cardIdForDelete, colId)
-        //TODO: Sami call service to delete card here, and just print out the response console.log.          
-       
+        //TODO: Sami call service to delete card here, and just print out the response console.log.
       }
     });
   }
