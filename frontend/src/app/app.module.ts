@@ -20,6 +20,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {MaterialModule} from './material.module';
 
 import { DragulaModule } from 'ng2-dragula';
+import { CardComponent } from './board/card.component';
 
 const routes: Routes = [
   { path: 'login' , component: LoginComponent },
@@ -38,7 +39,8 @@ const routes: Routes = [
     SignupComponent,
     BoardComponent,
     BoardDetailComponent,
-    ColumnComponent
+    ColumnComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,

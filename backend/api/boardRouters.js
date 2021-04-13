@@ -1,4 +1,5 @@
 var express = require('express');
+const mongo = require('mongodb');
 const BoardServices = require('../services/boardServices');
 var router = express.Router();
 
@@ -8,7 +9,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/dd/:id', function (req, res, next) {
-  let boardId = req.params.id;
+  let boardId = new mongo.ObjectID(req.params.id);
   new BoardServices(req.boardsCollection).findById(boardId)
     .then(serviceResp => {
       res.json(serviceResp)

@@ -47,4 +47,8 @@ export class BoardDragDropService {
   deleteCardOutOfColumn(board_id, column_id, card_id) {
     return this.http.delete(this.serverUrl +`/cards/${board_id}/${column_id}/${card_id}` )
   }
+
+  addCard(board_id, column_id, card_data) {
+    return this.http.post(`http://localhost:3000/api/cards/${board_id}/${column_id}`, card_data )
+  }
 }

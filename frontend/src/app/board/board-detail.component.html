@@ -20,6 +20,7 @@
                   [attr.title]="card.title"
                   [attr.order]="card.order" 
                   *ngFor="let card of col.cards" [innerHtml]="card.title"></div>
+                  <app-card [col_id] = "col._id"></app-card>
               </div>
             </div>
           </div>
