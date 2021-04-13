@@ -191,6 +191,7 @@ export class BoardDetailComponent implements OnInit {
         let cardIdForDelete = card._id
         console.log('good to remove ', cardIdForDelete, colId)
         //TODO: Sami call service to delete card here, and just print out the response console.log.
+        this.boardDDService.deleteCardOutOfColumn(this.boardId, colId, card._id).subscribe(res => console.log(res));
       }
     });
   }
