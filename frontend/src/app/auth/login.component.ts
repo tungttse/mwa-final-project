@@ -16,7 +16,7 @@ import { NgxSpinnerService } from "ngx-spinner";
   styleUrls: ['login.component.css']
 })
 export class LoginComponent implements OnInit {
-  hide = false
+  hide = true
   myForm: FormGroup;
   isLogedIn: Boolean = false
   resultResponse: any
