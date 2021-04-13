@@ -7,6 +7,10 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import * as _ from 'underscore';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ColumnService } from '../services/column.service';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+
+import { DataSharingService } from '../services/data-sharing-service.service';
+
 
 @Component({
   selector: 'board-detail',
@@ -29,6 +33,7 @@ export class BoardDetailComponent implements OnInit {
     private boardDDService: BoardDragDropService,
     private dragulaService: DragulaService,
     private activatedRoute: ActivatedRoute,
+    private dataSharingService: DataSharingService,
     public dialog: MatDialog,
     private columnService: ColumnService
   ) {
@@ -171,27 +176,34 @@ export class BoardDetailComponent implements OnInit {
 
   // Delete a column
   deleteColumn(event, col) {
-    console.log(event.target)
-    console.log(col)
-    let columnIdForDelete = col._id
-    this.columnService.deleteColumn(columnIdForDelete, this.boardId).
-      subscribe(re => console.log(re))
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Confirm Remove Column',
+        message: 'Are you sure, you want to remove this column: ' + col.name
+      }
+    });
 
-    col.isDeleted = true;
+    confirmDialog.afterClosed().subscribe(result => {
+      if (result === true) {
+        let columnIdForDelete = col._id
+        this.columnService.deleteColumn(columnIdForDelete, this.boardId).
+          subscribe(re => console.log(re))
 
-    //TODO: call api to delete column here
-    // then show console.log response.
-    // I will handle UI and make it disappear.
-
+        col.isDeleted = true;
+        this.columns = _.without(this.columns, _.findWhere(this.columns, {
+          _id: col._id
+        }));
+      }
+    });
   }
 
   // Add a new column
   addNewColumn(event) {
     let newColumnName = event.target.value
     this.columnService.addNewColumn(this.boardId, newColumnName).
-      subscribe(re => console.log(re))
-
-    //TODO: Tung Note. call api to create new column here
-    // And dont handle about callback UI, I will take it
+      subscribe(re => {
+        this.columns.push(re)
+        event.target.value = ""
+      })
   }
 }

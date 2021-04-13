@@ -54,13 +54,11 @@ export class BoardComponent implements OnInit {
     confirmDialog.afterClosed().subscribe(result => {
       if (result === true) {
         this.userService.deleteBoard(board._id).subscribe(re => {
-          var newBoards = _.without(this.boards, _.findWhere(this.boards, {
+          this.boards = _.without(this.boards, _.findWhere(this.boards, {
             _id: board._id
           }));
 
-          console.log(newBoards)
-          this.boards = newBoards
-          this.dataSharingService.userDeletedBoard.next(this.boards);
+          this.dataSharingService.userDeletedBoard.next(true);
         })
       }
     });

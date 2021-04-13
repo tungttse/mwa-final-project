@@ -10,16 +10,14 @@
 
                 <ng-container>
                   <div>
-                    <span *ngIf="!col.isEdited;else elseBlock " 
-                    class="group-handle" 
-                    (click)='edited(col)'
-                    >{{col.name}}</span>
+                    <span *ngIf="!col.isEdited;else elseBlock " class="group-handle"
+                      (click)='edited(col)'>{{col.name}}</span>
 
-                    <span class="delete-icon" (click)="deleteColumn($event, col)">X</span>
+                    <mat-icon class="delete-icon" (click)="deleteColumn($event, col)">delete_forever</mat-icon>
                   </div>
                   <ng-template #elseBlock>
-                    
-                   <input (keyup.enter)="editColumnName($event, col)" value="{{col.name}}"/>
+
+                    <input (keyup.enter)="editColumnName($event, col)" value="{{col.name}}" />
                     <ng-template #thenBlock></ng-template>
                   </ng-template>
                 </ng-container>
@@ -29,12 +27,12 @@
                 <div class="card-box" [attr.data-colid]="col._id" [attr.id]="card._id" [attr.title]="card.title"
                   [attr.order]="card.order" *ngFor="let card of col.cards" [innerHtml]="card.title"></div>
               </div>
-              <app-card [col_id] = "col._id"></app-card>
+              <app-card [col_id]="col._id"></app-card>
 
             </div>
           </div>
 
-          <input class="input-column" placeholder="new column" (keyup.enter)="addNewColumn($event)"/>
+          <input class="input-column" placeholder="new column" (keyup.enter)="addNewColumn($event)" />
         </div>
       </div>
     </div>

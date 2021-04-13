@@ -11,18 +11,19 @@ router.get('/', function(req, res, next) {
 router.post('/:board_id', async function (req, res, next) {
 
   try {
+    let newColumn = { 
+      "_id": new mongo.ObjectId(), 
+      "name": req.body.name,
+      "cards": [] } 
     await req.boardsCollection.updateOne(
       {
         _id: new mongo.ObjectId(req.params.board_id)
       },
       {
-        $push: { 'columns': { 
-          "_id": new mongo.ObjectId(), 
-          "name": req.body.name,
-          "cards": [] } }
+        $push: { 'columns': newColumn }
       }
     )
-    res.json({ "OK": "column added successfully" });
+    res.json(newColumn);
   
   }
   catch (err) {
