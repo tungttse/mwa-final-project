@@ -29,6 +29,7 @@
                 <div class="card-box" [attr.data-colid]="col._id" [attr.id]="card._id" [attr.title]="card.title"
                   [attr.order]="card.order" *ngFor="let card of col.cards" [innerHtml]="card.title"></div>
               </div>
+              <app-card [col_id] = "col._id"></app-card>
 
             </div>
           </div>

@@ -24,6 +24,7 @@ import { DragulaModule } from 'ng2-dragula';
 import { CardComponent } from './board/card.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { EditCardComponent } from './board/edit-card.component';
 
 const routes: Routes = [
   { path: '' , component: BoardComponent },
@@ -47,6 +48,7 @@ const routes: Routes = [
     BoardDetailComponent,
     ColumnComponent,
     CardComponent,
+    EditCardComponent,
     ConfirmDialogComponent
   ],
   imports: [
