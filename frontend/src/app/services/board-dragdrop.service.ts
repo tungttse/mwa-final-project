@@ -51,4 +51,8 @@ export class BoardDragDropService {
   addCard(board_id, column_id, card_data) {
     return this.http.post(`http://localhost:3000/api/cards/${board_id}/${column_id}`, card_data )
   }
+
+  editCard(board_id, column_id, card_id, card_data) {
+    return this.http.patch(`http://localhost:3000/api/cards/${card_id}/${board_id}/${column_id}`, card_data )
+  }
 }
