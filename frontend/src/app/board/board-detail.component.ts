@@ -206,4 +206,11 @@ export class BoardDetailComponent implements OnInit {
         event.target.value = ""
       })
   }
+
+  addNewCard(event) {
+    var match = _.find(this.columns, function(item) { return item._id === event.col_id })
+    if (match) {
+        match.cards.push(event)
+    }
+  }
 }

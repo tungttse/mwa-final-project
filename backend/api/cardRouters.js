@@ -31,6 +31,14 @@ router.post('/:id/:column_id', async function (req, res) {
 
 
     let card_id = new mongo.ObjectID();
+    let newCardObj = {
+      '_id': card_id,
+      ...req.body,
+      "board": name,
+      "column": column_name,
+      'created_date': new Date(),
+      'updated_date': new Date()
+    }
     await req.boardsCollection.updateOne(
       {
         _id: new mongo.ObjectID(req.params.id),
@@ -38,18 +46,11 @@ router.post('/:id/:column_id', async function (req, res) {
       },
       {
         '$push': {
-          'columns.$.cards': {
-            '_id': card_id,
-            ...req.body,
-            "board": name,
-            "column": column_name,
-            'created_date': new Date(),
-            'updated_date': new Date()
-          }
+          'columns.$.cards': newCardObj
         }
       },
     )
-    res.json({ "success": "ok"});
+    res.json(newCardObj);
   }
   catch (err) {
     res.json(
