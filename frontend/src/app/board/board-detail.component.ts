@@ -119,9 +119,9 @@ export class BoardDetailComponent implements OnInit {
             .subscribe()
         }
       })
-    );  
+    );
   }
-  
+
   ngOnInit(): void {
     this.spinner.show();
     this.boardDDService.getById(this.boardId).subscribe(
@@ -135,10 +135,10 @@ export class BoardDetailComponent implements OnInit {
           });
           this.columns = _.sortBy(res['columns'], "order")
           this.boardName = res['name']
-          this.loadingTimeOut = setTimeout(()=> {
+          this.loadingTimeOut = setTimeout(() => {
             this.spinner.hide();
           }, 500)
-          
+
         }
       }
     )
@@ -173,7 +173,7 @@ export class BoardDetailComponent implements OnInit {
   // Update cloumn name
   editColumnName(event, col) {
     let newColumnName = event.target.value
-    if(newColumnName === col.name) {
+    if (newColumnName === col.name) {
       col.isEdited = false;
       return false
     }
@@ -198,9 +198,15 @@ export class BoardDetailComponent implements OnInit {
     confirmDialog.afterClosed().subscribe(result => {
       if (result === true) {
         let cardIdForDelete = card._id
-        console.log('good to remove ', cardIdForDelete, colId)
-        //TODO: Sami call service to delete card here, and just print out the response console.log.
-        this.boardDDService.deleteCardOutOfColumn(this.boardId, colId, card._id).subscribe(res => console.log(res));
+        this.boardDDService.deleteCardOutOfColumn(this.boardId, colId, card._id).subscribe(res => {
+          let colum = _.find(this.columns, function (item) {
+            return item._id == colId;
+          });
+
+          colum.cards = _.without(colum.cards, _.findWhere(colum.cards, {
+            _id: cardIdForDelete
+          }));
+        });
       }
     });
   }
@@ -239,9 +245,9 @@ export class BoardDetailComponent implements OnInit {
   }
 
   addNewCard(event) {
-    var match = _.find(this.columns, function(item) { return item._id === event.col_id })
+    var match = _.find(this.columns, function (item) { return item._id === event.col_id })
     if (match) {
-        match.cards.push(event)
+      match.cards.push(event)
     }
   }
 }
