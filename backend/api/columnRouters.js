@@ -16,7 +16,10 @@ router.post('/:board_id', async function (req, res, next) {
         _id: new mongo.ObjectId(req.params.board_id)
       },
       {
-        $push: { 'columns': { "_id": new mongo.ObjectId(), ...req.body } }
+        $push: { 'columns': { 
+          "_id": new mongo.ObjectId(), 
+          "name": req.body.name,
+          "cards": [] } }
       }
     )
     res.json({ "OK": "column added successfully" });
