@@ -63,8 +63,6 @@ export class BoardComponent implements OnInit {
         })
       }
     });
-
-
   }
 
   onEdit(board) {

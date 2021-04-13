@@ -24,7 +24,7 @@
                   </span>
                 </div>
                 <ng-template #elseBlock>
-                  <input (keyup.enter)="editBoardName($event, board)" value="{{board.name}}" />
+                  <input (keyup.enter)="editBoardName($event, board)" value="{{board.name}}" class="board-edit-name"/>
                   <ng-template #thenBlock></ng-template>
                 </ng-template>
 
