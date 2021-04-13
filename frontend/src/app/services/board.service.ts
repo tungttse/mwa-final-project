@@ -15,7 +15,6 @@ export class BoardService {
       this.route.params.subscribe(params => {
         if (params['id']) {
           this.value = params.id;
-          console.log(this.value)
         }
       });
     }

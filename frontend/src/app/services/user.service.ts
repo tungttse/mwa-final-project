@@ -30,4 +30,8 @@ export class UserService {
   deleteBoard(boardId) {
     return this.http.delete(this.serverUrl + '/boards/' + boardId)
   }
+
+  editBoard(boardId, newName) {
+    return this.http.patch(this.serverUrl + '/boards/' + boardId, {name: newName})
+  }
 }

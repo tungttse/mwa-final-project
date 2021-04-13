@@ -6,5 +6,6 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class DataSharingService {
   public userCreatedNewBoard: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public userDeletedBoard: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   constructor() { }
 }

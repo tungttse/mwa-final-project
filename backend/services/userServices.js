@@ -76,6 +76,89 @@ class UserServices {
     })
   }
 
+  editBoard(boardId, newName, userId) {
+    return new Promise((resolve, reject) => {
+      try {
+        this.dbBoardCollection.updateOne(
+          { _id: boardId },
+          { $set: { "name": newName } }
+        )
+          .then(rs => {
+            if (rs) {
+              return new Promise((uresolve, ureject) => {
+                try {
+                  this.dbCollection.updateOne(
+                    {
+                      _id: userId,
+                      "boards._id": boardId
+                    },
+                    {
+                      $set: {
+                        "boards.$.name": newName
+                      }
+                    },
+                  )
+                    .then(urs => {
+                      if (urs) resolve({
+                        "id": boardId,
+                        "name": newName
+                      })
+                      else reject()
+                    })
+
+                } catch (e) {
+                  reject(e)
+                }
+              })
+            } else {
+              reject()
+            }
+          })
+
+      } catch (e) {
+        reject(e)
+      }
+    })
+  }
+
+  deleteBoard(boardId, userId) {
+    return new Promise((resolve, reject) => {
+      try {
+        this.dbBoardCollection.deleteOne(
+          { _id: boardId }
+        )
+          .then(rs => {
+            if (rs) {
+              return new Promise((uresolve, ureject) => {
+                try {
+                  this.dbCollection.updateOne(
+                    { _id: userId },
+                    {
+                      $pull: {
+                        "boards": { _id: boardId }
+                      }
+                    },
+                  )
+                    .then(urs => {
+                      if (urs) resolve(urs)
+                      else reject()
+                    })
+
+                } catch (e) {
+                  reject(e)
+                }
+              })
+            } else {
+              reject()
+            }
+          })
+
+      } catch (e) {
+        reject(e)
+      }
+    })
+  }
+
   findByEmail(email) {
     return new Promise((resolve, reject) => {
       try {

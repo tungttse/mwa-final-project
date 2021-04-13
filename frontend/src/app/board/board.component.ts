@@ -6,7 +6,7 @@ import { UserService } from '../services/user.service'
 
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
-
+import * as _ from 'underscore';
 @Component({
   selector: 'app-protected',
   templateUrl: 'board.component.html',
@@ -14,7 +14,7 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 })
 export class BoardComponent implements OnInit {
   content: String = "fetching..."
-  boards: any
+  boards: any = []
   constructor(
     private userService: UserService,
     private dataSharingService: DataSharingService,
@@ -52,10 +52,16 @@ export class BoardComponent implements OnInit {
       }
     });
     confirmDialog.afterClosed().subscribe(result => {
-      console.log(result)
       if (result === true) {
-        
-      
+        this.userService.deleteBoard(board._id).subscribe(re => {
+          var newBoards = _.without(this.boards, _.findWhere(this.boards, {
+            _id: board._id
+          }));
+
+          console.log(newBoards)
+          this.boards = newBoards
+          this.dataSharingService.userDeletedBoard.next(this.boards);
+        })
       }
     });
 
