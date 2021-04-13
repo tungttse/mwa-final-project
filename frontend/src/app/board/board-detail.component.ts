@@ -6,6 +6,7 @@ import { from, Subscription } from "rxjs";
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import * as _ from 'underscore';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { ColumnService } from '../services/column.service';
 
 @Component({
   selector: 'board-detail',
@@ -19,7 +20,16 @@ export class BoardDetailComponent implements OnInit {
   isEdited = false;
   inputAdded = false;
 
-  public columns: Array<any> = [];
+  public columns: Array<any> = [
+    {
+    name: 'Todo',
+    cards: [{ title: 'Item A' }, { title: 'Item B' }, { title: 'Item C' }, { title: 'Item D' }]
+    },
+    {
+    name: 'Doing',
+    cards: [{ title: 'Item 1' }, { title: 'Item 2' }, { title: 'Item 3' }, { title: 'Item 4' }]
+    },
+  ];
 
   boardId: any
 
@@ -29,7 +39,8 @@ export class BoardDetailComponent implements OnInit {
     private boardDDService: BoardDragDropService,
     private dragulaService: DragulaService,
     private activatedRoute: ActivatedRoute,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private columnService : ColumnService
   ) {
     this.boardId = this.activatedRoute.snapshot.paramMap.get('id');
     try{
@@ -163,30 +174,46 @@ export class BoardDetailComponent implements OnInit {
     col.isEdited = true;
   }
 
-  onEnter(event, col) {
+  // Update cloumn name
+  editColumnName(event, col) {
     console.log(event.target.value)
     let newColumnName = event.target.value
+    let coulmnID = col._id
+    this.columnService.updateColumnName(coulmnID , this.boardId, newColumnName).
+      subscribe(re => console.log(re))
+    
+      col.isEdited = false;
+      col.name = newColumnName
+
     //TODO: call api to update name column here
     // then set in the callback like bellow
 
-    col.isEdited = false;
-    col.name = newColumnName
+  
   }
  
-  onDelete(event, col) {
+  // Delete a column
+  deleteColumn(event, col) {
     console.log(event.target)
     console.log(col)
-    let idColumnForDelete =col._id
+    let columnIdForDelete = col._id
+    this.columnService.deleteColumn(columnIdForDelete, this.boardId).
+      subscribe(re => console.log(re))
+
+    col.isDeleted = true;
+
     //TODO: call api to delete column here
     // then show console.log response.
     // I will handle UI and make it disappear.
 
-    col.isDeleted = true;
   }
   
-  onEnterNewColumn(event) {
+  // Add a new column
+  addNewColumn(event) {
     console.log(event.target.value)
     let newColumnName = event.target.value
+    this.columnService.addNewColumn(this.boardId, newColumnName).
+      subscribe(re => console.log(re))
+
     //TODO: Tung Note. call api to create new column here
     // And dont handle about callback UI, I will take it
   }

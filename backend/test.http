@@ -78,8 +78,8 @@ content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhaG1hZEBob3RtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJEFsUkIyUC52ZGFRSXZvVDMwcy9xUGUxVVQzS3daWlZMM1R0eGlRLm80UVBPb2V4LklXeFAyIiwiaWF0IjoxNjE4MTczMTA3fQ.dsI8Ye4eZGz5M6fFPM3Qz0Q5iMpZ7J9pDs3djb2trK4
 
  { 
-            "name": "TEST",
-            "order": 1,
+            "name": "TEST5",
+            "order": 5,
             "cards": [
                 {
                     "_id": 3,

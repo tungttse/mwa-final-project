@@ -15,11 +15,11 @@
                     (click)='edited(col)'
                     >{{col.name}}</span>
 
-                    <span class="delete-icon" (click)="onDelete($event, col)">X</span>
+                    <span class="delete-icon" (click)="deleteColumn($event, col)">X</span>
                   </div>
                   <ng-template #elseBlock>
                     
-                   <input (keyup.enter)="onEnter($event, col)"/>
+                   <input (keyup.enter)="editColumnName($event, col)"/>
                     <ng-template #thenBlock></ng-template>
                   </ng-template>
                 </ng-container>
@@ -33,7 +33,7 @@
             </div>
           </div>
 
-          <input class="input-column" placeholder="new column" (keyup.enter)="onEnterNewColumn($event)"/>
+          <input class="input-column" placeholder="new column" (keyup.enter)="addNewColumn($event)"/>
         </div>
       </div>
     </div>
