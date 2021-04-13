@@ -36,6 +36,10 @@ export class BoardComponent implements OnInit {
   }
 
   createNewBoard(event) {
+    if(event.target.value === "" || event.target.value === null) {
+      return false
+    }
+
     this.userService.createNewBoard(event.target.value)
     .subscribe(res => {
       this.dataSharingService.userCreatedNewBoard.next(this.boards.push(res));
@@ -44,8 +48,6 @@ export class BoardComponent implements OnInit {
   }
 
   onDelete(board) {
-    console.log(board);
-
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: 'Confirm Remove Board',
