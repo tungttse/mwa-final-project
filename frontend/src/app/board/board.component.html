@@ -3,15 +3,19 @@
         <br>
         <br>
         <div class="container content-grid">
-        <mat-grid-list cols="3" rowHeight="4:2">
+        <mat-grid-list cols="2" rowHeight="4:2">
           <div *ngFor="let board of boards">
+           
             <mat-grid-tile>
               <div class="board-item">
                 <mat-icon class="edit-icon" (click)="onEdit(board)">edit</mat-icon>
                 <mat-icon (click)="onDelete(board)">delete_forever</mat-icon>
-                <a routerLink='/boards/{{board._id}}'>{{board.name}}</a>
+                <a routerLink='/boards/{{board._id}}'>
+                  <h3 style="text-transform: uppercase; color: #305b5d;">{{(board.name.length>45)? (board.name | slice:0:45)+'..':(board.name)}}</h3>
+                </a>
                 </div>
             </mat-grid-tile>
+        
           </div>
           
           <mat-grid-tile>
