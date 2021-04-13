@@ -31,22 +31,20 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiY0Bnb
 
 ###
 
-GET http://localhost:3000/api/cards/607364016bd55069f43d0bd0/1
+GET http://localhost:3000/api/cards/607364016bd55069f43d0bd0/6073d0bb11f2b173088af38b
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhYmNAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkeW02L3ZNdGZzNW1pdXhFYmJwWjI1T0dCUkg1QlNyUmVILzlTclRLT2R3UThHU3B5eFdRQk8iLCJpYXQiOjE2MTgxNzExMzB9.j4QFLq0pzf5uy_eNspg8cv8MvzhTw9D46_8sEmIxyAU
 
 
 ###
 
-POST http://localhost:3000/api/cards/607364016bd55069f43d0bd0/1
+POST http://localhost:3000/api/cards/607364016bd55069f43d0bd0/6073d0bb11f2b173088af38b
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhYmNAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkeW02L3ZNdGZzNW1pdXhFYmJwWjI1T0dCUkg1QlNyUmVILzlTclRLT2R3UThHU3B5eFdRQk8iLCJpYXQiOjE2MTgxNzExMzB9.j4QFLq0pzf5uy_eNspg8cv8MvzhTw9D46_8sEmIxyAU
 
 {
     "title": "pushing cards to db",
-    "order": 2,
     "description": "this card added via rest cleint",
-    "label": "mwa_project",
-    "deadline": "04/13/2021"
+    "label": "mwa_project"
 }
 
 ### Delete column (http://localhost:3000/api/columns/:column_id/:board_id)
@@ -56,7 +54,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhaG1hZEBob
 
 ###
 
-PATCH http://localhost:3000/api/cards/607378398ebc402a7842dc8e/607364016bd55069f43d0bd0/1
+PATCH http://localhost:3000/api/cards/607378398ebc402a7842dc8e/607364016bd55069f43d0bd0/6073d0bb11f2b173088af38b
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhYmNAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkeW02L3ZNdGZzNW1pdXhFYmJwWjI1T0dCUkg1QlNyUmVILzlTclRLT2R3UThHU3B5eFdRQk8iLCJpYXQiOjE2MTgxNzExMzB9.j4QFLq0pzf5uy_eNspg8cv8MvzhTw9D46_8sEmIxyAU
 
@@ -73,7 +71,7 @@ DELETE http://localhost:3000/api/cards/60737a89b8b2c431209c1c5c/607364016bd55069
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhYmNAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkeW02L3ZNdGZzNW1pdXhFYmJwWjI1T0dCUkg1QlNyUmVILzlTclRLT2R3UThHU3B5eFdRQk8iLCJpYXQiOjE2MTgxNzExMzB9.j4QFLq0pzf5uy_eNspg8cv8MvzhTw9D46_8sEmIxyAU
 
 ###  Add new column (http://localhost:3000/api/columns/:board_id)
-POST http://localhost:3000/api/columns/60735ffe1bbf604c9449a893
+POST http://localhost:3000/api/columns/607364016bd55069f43d0bd0
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhaG1hZEBob3RtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJEFsUkIyUC52ZGFRSXZvVDMwcy9xUGUxVVQzS3daWlZMM1R0eGlRLm80UVBPb2V4LklXeFAyIiwiaWF0IjoxNjE4MTczMTA3fQ.dsI8Ye4eZGz5M6fFPM3Qz0Q5iMpZ7J9pDs3djb2trK4
 
@@ -107,3 +105,15 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhaG1hZEBob
 }
 
 ###
+
+POST http://localhost:3000/api/cards/607364016bd55069f43d0bd0/6073d0bb11f2b173088af38b
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhaG1hZEBob3RtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJEFsUkIyUC52ZGFRSXZvVDMwcy9xUGUxVVQzS3daWlZMM1R0eGlRLm80UVBPb2V4LklXeFAyIiwiaWF0IjoxNjE4MTczMTA3fQ.dsI8Ye4eZGz5M6fFPM3Qz0Q5iMpZ7J9pDs3djb2trK4
+
+{
+    "title" : "test card"
+}
+
+###
+GET http://localhost:3000/api/users/boards
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQGdtYWlsLmNvbSIsImlhdCI6MTYxODI0NzkyMn0.QZi3XLQsWZwOiGN5-o2A3ufzCAM2Y7oXfqAobC_gxuk

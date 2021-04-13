@@ -15,18 +15,30 @@ router.get('/:id/:column_id', async function (req, res, next) {
 });
 
 //inserting a card from database
-//POST /api/cards/:id/:board_id/:column_id
+//POST /api/cards/:board_id/:column_id
 router.post('/:id/:column_id', async function (req, res) {
   //console.log(req.params.id + "\n" + req.params.column_id);
-  try {
+    try {
     //getting the column name and board name
     let x = await req.boardsCollection
       .findOne({ _id: new mongo.ObjectID(req.params.id) })
     let name = x.name;
-    let column_name = x.columns[new mongo.ObjectID(req.params.column_id)].name;
+    let column_name;
+    x.columns.forEach(element => {
+      if(element._id == req.params.column_id)
+        column_name = element.name
+    });
 
 
     let card_id = new mongo.ObjectID();
+    let newCardObj = {
+      '_id': card_id,
+      ...req.body,
+      "board": name,
+      "column": column_name,
+      'created_date': new Date(),
+      'updated_date': new Date()
+    }
     await req.boardsCollection.updateOne(
       {
         _id: new mongo.ObjectID(req.params.id),
@@ -34,18 +46,11 @@ router.post('/:id/:column_id', async function (req, res) {
       },
       {
         '$push': {
-          'columns.$.cards': {
-            '_id': card_id,
-            ...req.body,
-            "board": name,
-            "column": column_name,
-            'created_date': new Date(),
-            'updated_date': new Date()
-          }
+          'columns.$.cards': newCardObj
         }
       },
     )
-    res.json({ "success": "ok" });
+    res.json(newCardObj);
   }
   catch (err) {
     res.json(

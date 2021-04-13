@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './auth/login.component';
 import { SignupComponent } from './auth/signup.component'
+import { LogoutComponent } from './auth/logout.component'
 import { Routes, RouterModule } from '@angular/router';
 
 import { BoardComponent } from './board/board.component';
@@ -20,10 +21,17 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {MaterialModule} from './material.module';
 
 import { DragulaModule } from 'ng2-dragula';
+import { CardComponent } from './board/card.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { EditCardComponent } from './board/edit-card.component';
+import { ToastrModule } from 'ngx-toastr';
 
 const routes: Routes = [
+  { path: '' , component: BoardComponent, canActivate: [UserGuard] },
   { path: 'login' , component: LoginComponent },
   { path: 'signup' , component: SignupComponent },
+  { path: 'logout' , component: LogoutComponent },
   {
     path: 'boards/:id', component: BoardDetailComponent, canActivate: [UserGuard]
   },
@@ -36,9 +44,13 @@ const routes: Routes = [
     AppComponent,
     LoginComponent,
     SignupComponent,
+    LogoutComponent,
     BoardComponent,
     BoardDetailComponent,
-    ColumnComponent
+    ColumnComponent,
+    CardComponent,
+    EditCardComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -46,10 +58,15 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
-    // material UI
+    MatDialogModule,
     MaterialModule,
     FlexLayoutModule,
-    DragulaModule.forRoot()
+    DragulaModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-top-center',
+      preventDuplicates: true,
+    }), // ToastrModule added
     
   ],
   providers: [

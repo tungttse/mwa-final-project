@@ -1,6 +1,4 @@
-mat-sidenav-container,
-mat-sidenav-content,
-mat-sidenav {
+mat-sidenav-container, mat-sidenav-content, mat-sidenav {
   height: 100%;
 }
 
@@ -44,14 +42,38 @@ a:active {
 
 /* Tung */
 mat-sidenav-container{
-    background-color: #3c4252!important;
+    /* background-color: #3c4252!important; */
+    background-image: url('../assets/796832.jpeg');
+}
+
+.logo{
+    /* background-color: #3c4252!important; */
+    background-image: url('../assets/logo.png');
+    margin-top: 4px;
 }
 
 mat-toolbar{
     background-color: #f5f5f5 im !important;
 }
 
+.mat-toolbar{
+  height: 50px !important;
+}
+
 
 .name-text{
     color: #3c4252;
+}
+
+
+.menu-icon{
+  display: inline-block;
+  height: 30px;
+  margin: 0 5px;
+  padding-right: 5px;
+  text-align: center;
+  vertical-align: middle;
+  width: 19%;
+  margin-bottom: -4px;
+  font-size: 23px;
 }

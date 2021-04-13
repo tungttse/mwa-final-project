@@ -1,11 +1,44 @@
 <div>
-    <div class="container">
+    <div class="container content-area">
         <br>
         <br>
+        <div class="container content-grid">
+        <mat-grid-list cols="2" rowHeight="4:2">
+          <div *ngFor="let board of boards">
+           
+            <mat-grid-tile>
+              <div class="board-item">
+                <mat-icon class="edit-icon" (click)="onEdit(board)">edit</mat-icon>
+                <mat-icon (click)="onDelete(board)">delete_forever</mat-icon>
+               
+
+
+                <div>
+                  <span *ngIf="!board.isEdited;else elseBlock " class="group-handle"
+                    (click)='onEdit(board)'>
+
+                    <a routerLink='/boards/{{board._id}}'>
+                      <h3 style="text-transform: uppercase; color: #305b5d;">{{(board.name.length>45)? (board.name | slice:0:45)+'..':(board.name)}}</h3>
+                    </a>
+                  
+                  </span>
+                </div>
+                <ng-template #elseBlock>
+                  <input (keyup.enter)="editBoardName($event, board)" value="{{board.name}}" class="board-edit-name"/>
+                  <ng-template #thenBlock></ng-template>
+                </ng-template>
+
+              </div>
+            </mat-grid-tile>
         
-        <div class="container">
-            content    
-            
+          </div>
+          
+          <mat-grid-tile>
+            <input class="new-board" autofocus placeHolder="Create New Board" (keyup.enter)="createNewBoard($event)"/>
+            </mat-grid-tile>
+
+        </mat-grid-list>
+    
         </div>
     </div>
 </div>

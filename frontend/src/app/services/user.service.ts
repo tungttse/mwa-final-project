@@ -6,11 +6,9 @@ import { ActivatedRoute } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class BoardService {
+export class UserService {
   value: any;
-  private serverUrl="http://localhost:3000/api/boards"
-  private serverUserUrl="http://localhost:3000/api/users"
-
+  private serverUrl="http://localhost:3000/api/users"
 
   constructor(private http: HttpClient,
     private route: ActivatedRoute) { 
@@ -20,8 +18,20 @@ export class BoardService {
         }
       });
     }
+    
+  getListBoards(){
+    return this.http.get(this.serverUrl + '/boards')
+  }
+
+  createNewBoard(boardName){
+    return this.http.post(this.serverUrl + '/boards', {name : boardName})
+  }
+
+  deleteBoard(boardId) {
+    return this.http.delete(this.serverUrl + '/boards/' + boardId)
+  }
 
   editBoard(boardId, newName) {
-    return this.http.patch(this.serverUserUrl + '/boards/' + boardId, {name: newName})
+    return this.http.patch(this.serverUrl + '/boards/' + boardId, {name: newName})
   }
 }

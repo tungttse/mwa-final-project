@@ -30,12 +30,15 @@ export class SignupComponent {
     ) {
     
     this.myForm = this.formBuilder.group({
-      'email': ['abc@gmail.com', [
+      'email': ['', [
         Validators.required, 
         Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"),
       ], this.asyncEmailValidator.bind(this)],
       'password': ['',Validators.required],
       'repassword': ['',[Validators.required]],
+      'fname': ['', Validators.required],
+      'lname': ['', Validators.required],
+      'dob' :['', Validators.required],
     }, { validators: this.checkPasswords });
 
     this.myForm.valueChanges.subscribe(

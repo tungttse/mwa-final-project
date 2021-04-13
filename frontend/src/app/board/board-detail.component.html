@@ -1,39 +1,40 @@
 <div>
   <div class="container">
     <div class="container">
-      <div class="info">Board name</div>
       <div class="scroll-area">
+        <div class="board-name">
+          {{boardName}}
+        </div>
         <div dragula="COLUMNS" [(dragulaModel)]="columns" class="column-list">
           <div class="container-column" *ngFor="let col of columns">
             <div class="container-content-column">
               <span class="group-handle">
-
                 <ng-container>
                   <div>
-                    <span *ngIf="!col.isEdited;else elseBlock " 
-                    class="group-handle" 
-                    (click)='edited(col)'
-                    >{{col.name}}</span>
+                    <span *ngIf="!col.isEdited;else elseBlock " class="group-handle"
+                      (click)='edited(col)'>{{col.name}}</span>
 
-                    <span class="delete-icon" (click)="deleteColumn($event, col)">X</span>
+                    <mat-icon class="delete-icon" (click)="deleteColumn($event, col)">delete_forever</mat-icon>
                   </div>
                   <ng-template #elseBlock>
-                    
-                   <input class="column-edit" placeholder="Write new name" (keyup.enter)="editColumnName($event, col)"/>
+                    <input (keyup.enter)="editColumnName($event, col)" value="{{col.name}}" />
                     <ng-template #thenBlock></ng-template>
                   </ng-template>
                 </ng-container>
-
               </span>
-              <div class="container" dragula="column_items" [attr.id]="col._id" [(dragulaModel)]="col.cards">
+              <div class="container column_items" dragula="column_items" [attr.id]="col._id" [(dragulaModel)]="col.cards">
                 <div class="card-box" [attr.data-colid]="col._id" [attr.id]="card._id" [attr.title]="card.title"
-                  [attr.order]="card.order" *ngFor="let card of col.cards" [innerHtml]="card.title"></div>
+                  [attr.order]="card.order" *ngFor="let card of col.cards">
+                {{card.title}}
+                <mat-icon class="delete-icon" (click)="deleteCardItem($event, card, col._id)">delete_forever</mat-icon>
               </div>
-
+                  
+              </div>
+              <app-card [col_id]="col._id" class="input-column" (newCardEvent)="addNewCard($event)"></app-card>
             </div>
           </div>
 
-          <input class="input-column" placeholder="new column" (keyup.enter)="addNewColumn($event)"/>
+          <input class="input-column card-box" placeholder="Add New Column" (keyup.enter)="addNewColumn($event)" />
         </div>
       </div>
     </div>

@@ -10,15 +10,14 @@ export class ColumnService {
   constructor(private http: HttpClient) { }
  
   addNewColumn(board_id, column_name) {
-    return this.http.post(this.serverUrl +`/${board_id}`,column_name)
+    return this.http.post(this.serverUrl +`/${board_id}`, {name: column_name})
   }
 
   updateColumnName(column_id, board_id, column_name) {
-    return this.http.patch(this.serverUrl + `/${column_id}/${board_id}`,column_name)
+    return this.http.patch(this.serverUrl + `/${column_id}/${board_id}`,{name: column_name})
   }
 
   deleteColumn(column_id, board_id) {
-    return this.http.delete(this.serverUrl + `${column_id}/${board_id}`)
+    return this.http.delete(this.serverUrl + `/${column_id}/${board_id}`)
   }
-  
 }
