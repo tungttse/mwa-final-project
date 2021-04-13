@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { BoardDragDropService } from '../services/board-dragdrop.service'
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DragulaService } from "ng2-dragula";
@@ -18,9 +18,8 @@ import { DataSharingService } from '../services/data-sharing-service.service';
   styleUrls: ['board-detail.component.css']
 })
 export class BoardDetailComponent implements OnInit {
-  //TODO: add spiner state
-
   content: any
+  editTimeOut: any
   isEdited = false;
   inputAdded = false;
 
@@ -118,9 +117,9 @@ export class BoardDetailComponent implements OnInit {
             .subscribe(re => console.log(re))
         }
       })
-    );
+    );  
   }
-
+  
   ngOnInit(): void {
     this.boardDDService.getById(this.boardId).subscribe(
       res => {
@@ -153,16 +152,24 @@ export class BoardDetailComponent implements OnInit {
 
   ngOnDestroy() {
     this.subs.unsubscribe();
+    clearTimeout(this.editTimeOut)
   }
 
   edited(col) {
     col.isEdited = true;
+
+    this.editTimeOut = setTimeout(() => {
+      col.isEdited = false;
+    }, 5000)
   }
 
   // Update cloumn name
   editColumnName(event, col) {
-    console.log(event.target.value)
     let newColumnName = event.target.value
+    if(newColumnName === col.name) {
+      col.isEdited = false;
+      return false
+    }
     let coulmnID = col._id
     this.columnService.updateColumnName(coulmnID, this.boardId, newColumnName).
       subscribe(re => console.log(re))
@@ -170,8 +177,6 @@ export class BoardDetailComponent implements OnInit {
     col.isEdited = false;
     col.name = newColumnName
 
-    //TODO: call api to update name column here
-    // then set in the callback like bellow
   }
 
   // Delete a column
