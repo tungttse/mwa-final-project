@@ -71,6 +71,11 @@ export class BoardComponent implements OnInit {
 
   editBoardName(event, board) {
     let newName = event.target.value
+    if(newName === "" || newName === null) {
+      board.isEdited = false;
+      return false
+    }
+
     if(newName === board.name) {
       board.isEdited = false;
       return false
