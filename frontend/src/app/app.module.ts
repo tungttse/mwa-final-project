@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './auth/login.component';
 import { SignupComponent } from './auth/signup.component'
+import { LogoutComponent } from './auth/logout.component'
 import { Routes, RouterModule } from '@angular/router';
 
 import { BoardComponent } from './board/board.component';
@@ -23,8 +24,10 @@ import { DragulaModule } from 'ng2-dragula';
 import { CardComponent } from './board/card.component';
 
 const routes: Routes = [
+  { path: '' , component: BoardComponent },
   { path: 'login' , component: LoginComponent },
   { path: 'signup' , component: SignupComponent },
+  { path: 'logout' , component: LogoutComponent },
   {
     path: 'boards/:id', component: BoardDetailComponent, canActivate: [UserGuard]
   },
@@ -37,6 +40,7 @@ const routes: Routes = [
     AppComponent,
     LoginComponent,
     SignupComponent,
+    LogoutComponent,
     BoardComponent,
     BoardDetailComponent,
     ColumnComponent,

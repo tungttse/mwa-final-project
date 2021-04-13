@@ -13,7 +13,10 @@ import * as _ from 'underscore';
 })
 export class BoardDetailComponent implements OnInit {
   //TODO: add spiner state
-  content: any = "fetching..."
+
+  content: any
+  isEdited = false;
+  inputAdded = false;
 
   public columns: Array<any> = [];
 
@@ -27,26 +30,23 @@ export class BoardDetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.boardId = this.activatedRoute.snapshot.paramMap.get('id');
-    
-    this.dragulaService.createGroup("COLUMNS", {
-      direction: 'horizontal',
-      moves: (el, source, handle) => {
-        return handle.className === "group-handle"
-      }
-    });
+    try{
+      this.dragulaService.createGroup("COLUMNS", {
+        direction: 'horizontal',
+        moves: (el, source, handle) => {
+          return handle.className === "group-handle"
+        }
+      });
+    } catch(e){}
  
     this.subs.add(this.dragulaService.drop()
       .subscribe(({ name, el, target, source, sibling }) => {
-        console.log("drop catch all ", el ,target, sibling)
         if(el.getAttribute("id") == null) {
           return false
         }
       
         let targetColumnId = target.getAttribute('id')
         let childNodes = target.children
-        
-       
-        let oldCardOrder = el.getAttribute("order")
         let movedCardId = el.getAttribute("id")
         let sourceColumnId = el.getAttribute("data-colid")  
     
@@ -63,9 +63,8 @@ export class BoardDetailComponent implements OnInit {
   
               this.boardDDService.changeOrderCard(this.boardId, body)
               .subscribe(re => console.log(re))
-            } else {
-              console.log('leuleu')
-            }
+            } 
+            
           }
 
           // targetColumnId
@@ -95,7 +94,6 @@ export class BoardDetailComponent implements OnInit {
                   this._updateOrderCard(targetColumnId, childNodes)
                   this.boardDDService.deleteCardOutOfColumn(this.boardId, sourceColumnId, movedCardId).subscribe(dres => console.log(dres))
                 }
-
                 // delete old card
               })
             }
@@ -153,4 +151,14 @@ export class BoardDetailComponent implements OnInit {
   ngOnDestroy() {
     this.subs.unsubscribe();
   }
+
+  edited() {
+    this.isEdited = true;
+  }
+
+  apply(content) {
+    this.columns[0].name = content;
+    this.inputAdded = true;
+  }
+
 }

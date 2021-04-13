@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit {
           alert(res['error'])
         } else {
           this.storageService.token = res['token']
+          this.authService.userInfo = res['userInfo']
           this.isLogedIn = true
           this.router.navigateByUrl('/boards');
         }

@@ -48,6 +48,26 @@ router.patch('/:column_id/:board_id', async function (req, res) {
   }
 });
 
+router.delete('/:column_id/:board_id', async function (req, res,) {
+  
+  try {
+    await req.boardsCollection.updateOne(
+      {
+        _id: new mongo.ObjectId(req.params.board_id),
+      },
+      {
+        $pull: { 'columns': { '_id': new mongo.ObjectId(req.params.column_id) } },
+      }
+    )
+    res.json({ "ok": "Column deleted successfully" });
+        
+  }
+  catch (err) {
+    res.json({ err: err })
+   
+  }
+  
+});
 
 
 module.exports = router;
