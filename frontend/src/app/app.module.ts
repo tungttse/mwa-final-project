@@ -21,6 +21,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {MaterialModule} from './material.module';
 
 import { DragulaModule } from 'ng2-dragula';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const routes: Routes = [
   { path: '' , component: BoardComponent },
@@ -42,7 +44,8 @@ const routes: Routes = [
     LogoutComponent,
     BoardComponent,
     BoardDetailComponent,
-    ColumnComponent
+    ColumnComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,7 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
-    // material UI
+    MatDialogModule,
     MaterialModule,
     FlexLayoutModule,
     DragulaModule.forRoot()

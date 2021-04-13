@@ -4,6 +4,9 @@ import { DataSharingService } from '../services/data-sharing-service.service';
 
 import { UserService } from '../services/user.service'
 
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+
 @Component({
   selector: 'app-protected',
   templateUrl: 'board.component.html',
@@ -14,7 +17,8 @@ export class BoardComponent implements OnInit {
   boards: any
   constructor(
     private userService: UserService,
-    private dataSharingService: DataSharingService
+    private dataSharingService: DataSharingService,
+    private dialog: MatDialog
      ) { }
 
   ngOnInit(): void {
@@ -40,6 +44,21 @@ export class BoardComponent implements OnInit {
 
   onDelete(board) {
     console.log(board);
+
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Confirm Remove Board',
+        message: 'Are you sure, you want to remove this board: ' + board.name
+      }
+    });
+    confirmDialog.afterClosed().subscribe(result => {
+      console.log(result)
+      if (result === true) {
+        
+      
+      }
+    });
+
 
   }
 

@@ -26,4 +26,8 @@ export class UserService {
   createNewBoard(boardName){
     return this.http.post(this.serverUrl + '/boards', {name : boardName})
   }
+
+  deleteBoard(boardId) {
+    return this.http.delete(this.serverUrl + '/boards/' + boardId)
+  }
 }
