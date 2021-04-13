@@ -7,45 +7,58 @@ import { UserService } from '../services/user.service'
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import * as _ from 'underscore';
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-protected',
   templateUrl: 'board.component.html',
   styleUrls: ['board.component.css']
 })
 export class BoardComponent implements OnInit {
-  content: String = "fetching..."
+  content: String = ""
+  timeHandler: any
+  loadingTimeOut: any
   boards: any = []
   constructor(
     private userService: UserService,
     private boardService: BoardService,
     private dataSharingService: DataSharingService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private spinner: NgxSpinnerService
      ) { }
 
   ngOnInit(): void {
+    this.spinner.show();
     this.userService.getListBoards().subscribe(
       res => {
-        console.log(res)
         if(res['error']) {
           this.content = "Error " + res['error']
         }
         this.content = res['data']
         this.boards = res['boards']
+        this.loadingTimeOut = setTimeout(()=> {
+          this.spinner.hide();
+        }, 500)
       }
     )
   }
 
   createNewBoard(event) {
+    if(event.target.value === "" || event.target.value === null) {
+      return false
+    }
+
     this.userService.createNewBoard(event.target.value)
     .subscribe(res => {
-      this.dataSharingService.userCreatedNewBoard.next(this.boards.push(res));
+      if(this.boards) {
+        this.boards.push(res)
+      } else {
+        this.boards = [res]
+      }
       event.target.value = ""
     })
   }
 
   onDelete(board) {
-    console.log(board);
-
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: 'Confirm Remove Board',
@@ -67,10 +80,17 @@ export class BoardComponent implements OnInit {
 
   onEdit(board) {
     board.isEdited = true
+    this.timeHandler = setTimeout(() => {
+      board.isEdited = false
+    }, 10000)
   }
 
   editBoardName(event, board) {
     let newName = event.target.value
+    if(newName === "" || newName === null) {
+      board.isEdited = false;
+      return false
+    }
     if(newName === board.name) {
       board.isEdited = false;
       return false
@@ -84,5 +104,7 @@ export class BoardComponent implements OnInit {
   }
 
   ngOnDestroy() {
+    clearTimeout(this.timeHandler)
+    clearTimeout(this.loadingTimeOut)
   }
 }

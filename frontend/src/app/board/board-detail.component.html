@@ -5,38 +5,35 @@
         <div class="board-name">
           {{boardName}}
         </div>
+        
         <div dragula="COLUMNS" [(dragulaModel)]="columns" class="column-list">
           <div class="container-column" *ngFor="let col of columns">
             <div class="container-content-column">
               <span class="group-handle">
                 <ng-container>
-                  <div>
-                    <span *ngIf="!col.isEdited;else elseBlock " class="group-handle"
+                  <span *ngIf="!col.isEdited;else elseBlock "
                       (click)='edited(col)'>{{col.name}}</span>
-
                     <mat-icon class="delete-icon" (click)="deleteColumn($event, col)">delete_forever</mat-icon>
-                  </div>
                   <ng-template #elseBlock>
-                    <input (keyup.enter)="editColumnName($event, col)" value="{{col.name}}" />
+                    <input class="column-edit" (keyup.enter)="editColumnName($event, col)" value="{{col.name}}" />
                     <ng-template #thenBlock></ng-template>
                   </ng-template>
                 </ng-container>
               </span>
               <div class="container column_items" dragula="column_items" [attr.id]="col._id" [(dragulaModel)]="col.cards">
                 <div class="card-box" [attr.data-colid]="col._id" [attr.id]="card._id" [attr.title]="card.title"
-                  [attr.order]="card.order" *ngFor="let card of col.cards">
-                {{card.title}}
-                <mat-icon class="delete-icon" (click)="deleteCardItem($event, card, col._id)">delete_forever</mat-icon>
-              </div>
-                  
+                    [attr.order]="card.order" *ngFor="let card of col.cards">
+                  {{card.title}}
+                  <mat-icon class="delete-icon" (click)="deleteCardItem($event, card, col._id)">delete_forever</mat-icon>
+                </div>
               </div>
               <app-card [col_id]="col._id" class="input-column" (newCardEvent)="addNewCard($event)"></app-card>
             </div>
           </div>
-
           <input class="input-column card-box" placeholder="Add New Column" (keyup.enter)="addNewColumn($event)" />
         </div>
       </div>
     </div>
   </div>
 </div>
+<ngx-spinner></ngx-spinner>

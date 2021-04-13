@@ -26,21 +26,18 @@ a:active {
 .icon {
   display: inline-block;
   height: 30px;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   padding-right: 5px;
   text-align: center;
   vertical-align: middle;
-  width: 15%;
+  /* width: 15%; */
 }
 
 .label {
-  display: inline-block;
   line-height: 30px;
   margin: 0;
-  width: 85%;
 }
 
-/* Tung */
 mat-sidenav-container{
     /* background-color: #3c4252!important; */
     background-image: url('../assets/796832.jpeg');
@@ -60,11 +57,13 @@ mat-toolbar{
   height: 50px !important;
 }
 
+.logined-bar{
+  background-color: #5fcdf9;
+}
 
 .name-text{
     color: #3c4252;
 }
-
 
 .menu-icon{
   display: inline-block;
@@ -73,7 +72,10 @@ mat-toolbar{
   padding-right: 5px;
   text-align: center;
   vertical-align: middle;
-  width: 19%;
   margin-bottom: -4px;
   font-size: 23px;
+}
+
+.wel-come{
+  color: rgb(86, 86, 190);
 }

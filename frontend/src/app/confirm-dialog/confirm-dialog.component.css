@@ -1,3 +1,7 @@
 .mat-dialog-container {
     background-color: #ddeef1;
 }
+
+.mat-button {
+    border: 1px solid #57bcd3;
+}

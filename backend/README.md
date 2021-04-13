@@ -1,9 +1,9 @@
 # Modern web application project
 
-## This is frontend side.
+## This is backend side.
 ### Technical Stacks:
-- Angular
-- Material Angular UI
+- Nodejs
+- MongoDb
 ## Authors:
 - Thanh Tung Truong
 - Admad Osaili

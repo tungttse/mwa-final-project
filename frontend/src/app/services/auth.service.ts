@@ -15,7 +15,11 @@ export class AuthService {
   user$ = this.user.asObservable();
   
   constructor(private http: HttpClient) {
-   }
+  }
+
+  emitEventUser(value){
+    this.user.next(value.fname);
+  }
 
   get userInfo() {
     return localStorage.getItem('currentUser');

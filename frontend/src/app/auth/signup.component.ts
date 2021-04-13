@@ -11,7 +11,8 @@ import { map, catchError } from "rxjs/operators";
 import { AuthService } from '../services/auth.service';
 import { StorageService } from '../services/storage.service';
 import { Router } from '@angular/router';
-
+import { NgxSpinnerService } from "ngx-spinner";
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-signup',
   templateUrl: 'signup.component.html',
@@ -26,6 +27,8 @@ export class SignupComponent {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService,
     private storageService : StorageService
     ) {
     
@@ -63,12 +66,18 @@ export class SignupComponent {
   }
   
   onSubmit() {
+    this.spinner.show()
     this.authService.doPostSignup(this.myForm.value).subscribe(
       res =>  {
         if(res['error']) {
           alert(res['error'])
+          this.toastr.error('Error', res['error']);
+          this.spinner.hide()
         } else {
           this.storageService.token = res['token']
+          this.spinner.hide()
+
+          this.authService.emitEventUser(this.myForm.value)
           this.router.navigateByUrl('/boards');
         }
       }
