@@ -8,7 +8,7 @@
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-        <mat-toolbar>
+        <mat-toolbar [class]="classBarName">
             <div fxHide.gt-xs>
                 <button mat-icon-button (click)="sidenav.toggle()">
                     <mat-icon>menu</mat-icon>
@@ -21,11 +21,9 @@
             </div>
 
             <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
-                
-                <ul fxLayout fxLayoutGap="20px" class="navigation-items"
-                    *ngIf="((userInfo$ | async) || userInfoData); else other_content">
+                <ul fxLayout fxLayoutGap="20px" class="navigation-items" *ngIf="(fName || userInfoData); else other_content">
                     <li>
-                        <span>Welcome {{fName}} </span>
+                        <span *ngIf="fName" class="wel-come">Welcome {{fName}}</span>
                         <a routerLink="/logout" class="name-text">
                             <mat-icon class="icon menu-icon">input</mat-icon>
                             <span class="label">Logout</span>
@@ -36,6 +34,7 @@
                 <ng-template #other_content>
                     
                 </ng-template>
+
             </div>
 
         </mat-toolbar>

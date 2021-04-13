@@ -76,6 +76,8 @@ export class SignupComponent {
         } else {
           this.storageService.token = res['token']
           this.spinner.hide()
+
+          this.authService.emitEventUser(this.myForm.value)
           this.router.navigateByUrl('/boards');
         }
       }

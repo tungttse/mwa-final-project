@@ -11,22 +11,38 @@ import { UserService } from './services/user.service';
 
 export class AppComponent {
   title = 'Authentication Application';
-  userInfoData: Object = null
+  userInfoData: any = null
   private user = new Subject();
   public userInfo$ = this.user.asObservable();
-  private fName : String = ""
+  fName : String = ""
+  classBarName = ""
 
-  constructor(private authService: AuthService,private userService: UserService) {
+  constructor(
+    private authService: AuthService,
+    private userService: UserService
+    ) {
     this.userInfo$ = this.authService.user$;
     this.userInfoData = this.authService.userInfo
+    
+    if(this.userInfoData) {
+      this.fName = JSON.parse(this.userInfoData).first_name
+      this.classBarName = "logined-bar"
+    } else {
+      this.classBarName = ""
+    }
+    
+    this.userInfo$.subscribe(res=>{
+      if(res) {
+        this.fName = res['first_name'] ? res['first_name'] : res
+        this.classBarName = "logined-bar"
+      } else {
+        this.classBarName = ""
+        this.fName = ""
+      }
+      
+    })
   }
 
   ngOnInit() {
-    this.userService.getUserInfo().subscribe(
-      res => {
-        console.log(res['first_name'])
-        this.fName = res['first_name']
-      }
-    );
   }
 }
