@@ -73,15 +73,6 @@
   cursor: pointer;
 }
 
-.column-edit{
-  width: 250px;
-  height: 30px;
-  border: 0px;
-  background-color: #ebecf0;
-  cursor: pointer;
-  outline: none;
-}
-
 .board-name {
   border: 1px solid rebeccapurple;
   margin-top: -1px;
@@ -97,3 +88,13 @@
   padding: 0 13px;
   padding-top: 6px;
 }
+
+.column-edit{
+  width: 250px;
+  height: 30px;
+  border: 0px;
+  background-color: #ebecf0;
+  cursor: pointer;
+  outline: none;
+} 
+
