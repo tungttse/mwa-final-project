@@ -15,7 +15,7 @@
                       (click)='edited(col)'>{{col.name}}</span>
                     <mat-icon class="delete-icon" (click)="deleteColumn($event, col)">delete_forever</mat-icon>
                   <ng-template #elseBlock>
-                    <input (keyup.enter)="editColumnName($event, col)" value="{{col.name}}" />
+                    <input class="column-edit" (keyup.enter)="editColumnName($event, col)" value="{{col.name}}" />
                     <ng-template #thenBlock></ng-template>
                   </ng-template>
                 </ng-container>
