@@ -18,7 +18,7 @@ export class ColumnService {
   }
 
   deleteColumn(column_id, board_id) {
-    return this.http.delete(this.serverUrl + `${column_id}/${board_id}`)
+    return this.http.delete(this.serverUrl + `/${column_id}/${board_id}`)
   }
   
 }
