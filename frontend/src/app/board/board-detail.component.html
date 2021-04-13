@@ -19,7 +19,7 @@
                   </div>
                   <ng-template #elseBlock>
                     
-                   <input (keyup.enter)="editColumnName($event, col)"/>
+                   <input class="column-edit" placeholder="Write new name" (keyup.enter)="editColumnName($event, col)"/>
                     <ng-template #thenBlock></ng-template>
                   </ng-template>
                 </ng-container>

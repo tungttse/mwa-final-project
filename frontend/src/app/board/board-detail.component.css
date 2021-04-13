@@ -62,3 +62,11 @@
   float: right;
   cursor: pointer;
 }
+
+.column-edit{
+  width: 250px;
+  height: 30px;
+  border: 0px;
+  background-color: #ebecf0;
+  cursor: pointer;
+}
