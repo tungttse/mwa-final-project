@@ -14,11 +14,10 @@ export class ColumnService {
   }
 
   updateColumnName(column_id, board_id, column_name) {
-    return this.http.patch(this.serverUrl + `/${column_id}/${board_id}`,column_name)
+    return this.http.patch(this.serverUrl + `/${column_id}/${board_id}`,{name: column_name})
   }
 
   deleteColumn(column_id, board_id) {
     return this.http.delete(this.serverUrl + `/${column_id}/${board_id}`)
   }
-  
 }
