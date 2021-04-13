@@ -25,7 +25,11 @@
               </span>
               <div class="container column_items" dragula="column_items" [attr.id]="col._id" [(dragulaModel)]="col.cards">
                 <div class="card-box" [attr.data-colid]="col._id" [attr.id]="card._id" [attr.title]="card.title"
-                  [attr.order]="card.order" *ngFor="let card of col.cards" [innerHtml]="card.title"></div>
+                  [attr.order]="card.order" *ngFor="let card of col.cards">
+                {{card.title}}
+                <mat-icon class="delete-icon" (click)="deleteCardItem($event, card, col._id)">delete_forever</mat-icon>
+              </div>
+                  
               </div>
               <app-card [col_id]="col._id" class="input-column" (newCardEvent)="addNewCard($event)"></app-card>
             </div>

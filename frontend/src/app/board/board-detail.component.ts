@@ -183,6 +183,24 @@ export class BoardDetailComponent implements OnInit {
   }
 
   // Delete a column
+  deleteCardItem(event, card, colId) {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Confirm Remove Card',
+        message: 'Are you sure, you want to remove this card?'
+      }
+    });
+
+    confirmDialog.afterClosed().subscribe(result => {
+      if (result === true) {
+        let cardIdForDelete = card._id
+        console.log('good to remove ', cardIdForDelete, colId)
+        //TODO: Sami call service to delete card here, and just print out the response console.log.          
+       
+      }
+    });
+  }
+  // Delete a column
   deleteColumn(event, col) {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
