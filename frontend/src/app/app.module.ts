@@ -26,6 +26,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditCardComponent } from './board/edit-card.component';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 const routes: Routes = [
   { path: '' , component: BoardComponent, canActivate: [UserGuard] },
@@ -67,6 +68,7 @@ const routes: Routes = [
       positionClass: 'toast-top-center',
       preventDuplicates: true,
     }), // ToastrModule added
+    NgxSpinnerModule
     
   ],
   providers: [

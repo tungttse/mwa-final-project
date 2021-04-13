@@ -10,7 +10,7 @@ import { ColumnService } from '../services/column.service';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 import { DataSharingService } from '../services/data-sharing-service.service';
-
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'board-detail',
@@ -33,7 +33,7 @@ export class BoardDetailComponent implements OnInit {
     private boardDDService: BoardDragDropService,
     private dragulaService: DragulaService,
     private activatedRoute: ActivatedRoute,
-    private dataSharingService: DataSharingService,
+    private spinner: NgxSpinnerService,
     public dialog: MatDialog,
     private columnService: ColumnService
   ) {
@@ -97,9 +97,8 @@ export class BoardDetailComponent implements OnInit {
               this.boardDDService.addCardToColumn(this.boardId, targetColumnId, card[0]).subscribe(ars => {
                 if (ars) {
                   this._updateOrderCard(targetColumnId, childNodes)
-                  this.boardDDService.deleteCardOutOfColumn(this.boardId, sourceColumnId, movedCardId).subscribe(dres => console.log(dres))
+                  this.boardDDService.deleteCardOutOfColumn(this.boardId, sourceColumnId, movedCardId).subscribe()
                 }
-                // delete old card
               })
             }
           })
@@ -116,13 +115,14 @@ export class BoardDetailComponent implements OnInit {
             "new_order": index + 1
           }
           this.boardDDService.changeOrderColumn(this.boardId, body)
-            .subscribe(re => console.log(re))
+            .subscribe()
         }
       })
     );  
   }
   
   ngOnInit(): void {
+    this.spinner.show();
     this.boardDDService.getById(this.boardId).subscribe(
       res => {
         if (!res || res['error'] || res["_id"] == null || typeof res["_id"] === "undefined") {
@@ -134,6 +134,7 @@ export class BoardDetailComponent implements OnInit {
           });
           this.columns = _.sortBy(res['columns'], "order")
           this.boardName = res['name']
+          this.spinner.hide();
         }
       }
     )
@@ -147,9 +148,8 @@ export class BoardDetailComponent implements OnInit {
         "new_order": index + 1,
         "card_id": element.getAttribute('id')
       }
-
       this.boardDDService.changeOrderCard(this.boardId, body)
-        .subscribe(re => console.log(re))
+        .subscribe()
     }
   }
 
@@ -174,7 +174,7 @@ export class BoardDetailComponent implements OnInit {
     }
     let coulmnID = col._id
     this.columnService.updateColumnName(coulmnID, this.boardId, newColumnName).
-      subscribe(re => console.log(re))
+      subscribe()
 
     col.isEdited = false;
     col.name = newColumnName

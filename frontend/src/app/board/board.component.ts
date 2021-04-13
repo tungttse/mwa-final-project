@@ -7,31 +7,34 @@ import { UserService } from '../services/user.service'
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import * as _ from 'underscore';
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-protected',
   templateUrl: 'board.component.html',
   styleUrls: ['board.component.css']
 })
 export class BoardComponent implements OnInit {
-  content: String = "fetching..."
+  content: String = ""
   timeHandler: any
   boards: any = []
   constructor(
     private userService: UserService,
     private boardService: BoardService,
     private dataSharingService: DataSharingService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private spinner: NgxSpinnerService
      ) { }
 
   ngOnInit(): void {
+    this.spinner.show();
     this.userService.getListBoards().subscribe(
       res => {
-        console.log(res)
         if(res['error']) {
           this.content = "Error " + res['error']
         }
         this.content = res['data']
         this.boards = res['boards']
+        this.spinner.hide();
       }
     )
   }
