@@ -79,6 +79,7 @@ class BoardServices {
   }
 
   updateCardOrder(id, data) { // data {column_id, new_order, card_id}
+    console.log(data)
     return new Promise((resolve, reject) => {
       try {
         this.dbCollection.updateOne(

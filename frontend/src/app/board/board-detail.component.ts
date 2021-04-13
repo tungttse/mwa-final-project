@@ -20,8 +20,9 @@ import { DataSharingService } from '../services/data-sharing-service.service';
 export class BoardDetailComponent implements OnInit {
   content: any
   editTimeOut: any
-  isEdited = false;
-  inputAdded = false;
+  isEdited = false
+  inputAdded = false
+  boardName: String
 
   public columns: Array<any> = [];
 
@@ -48,6 +49,7 @@ export class BoardDetailComponent implements OnInit {
 
     this.subs.add(this.dragulaService.drop()
       .subscribe(({ name, el, target, source, sibling }) => {
+        console.log('ddrp')
         if (el.getAttribute("id") == null) {
           return false
         }
@@ -131,6 +133,7 @@ export class BoardDetailComponent implements OnInit {
             element.cards = _.sortBy(element.cards, "order")
           });
           this.columns = _.sortBy(res['columns'], "order")
+          this.boardName = res['name']
         }
       }
     )

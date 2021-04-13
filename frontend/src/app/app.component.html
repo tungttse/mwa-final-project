@@ -90,22 +90,15 @@
                 </button>
             </div>
             <div>
-                <a class="name-text" routerLink="/">
-                    MWA Trello
-                </a>
+                <img width="65" src="https://logos-world.net/wp-content/uploads/2021/02/Trello-Symbol.png" class="logo"/>
             </div>
 
             <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
                 <ul fxLayout fxLayoutGap="20px" class="navigation-items"
                     *ngIf="((userInfo$ | async) || userInfoData); else other_content">
                     <li>
-                        <a routerLink="/boards/123" class="name-text">
-                            <span class="label">Hardcode Board 123 for test</span>
-                        </a>
-                    </li>
-                    <li>
                         <a routerLink="/logout" class="name-text">
-                            <mat-icon class="icon">input</mat-icon>
+                            <mat-icon class="icon menu-icon">input</mat-icon>
                             <span class="label">Logout</span>
                         </a>
                     </li>
