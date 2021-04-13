@@ -21,8 +21,8 @@ router.get('/dd/:id', function (req, res, next) {
 
 router.patch('/dd/order/columns/:board_id', function (req, res, next) {
   let boardId = new mongo.ObjectID(req.params.board_id);
-  let data = req.body
-  new BoardServices(req.boardsCollection).updateColumnOrder(boardId, data)
+  let columnId = new mongo.ObjectID(req.body.column_id);
+  new BoardServices(req.boardsCollection).updateColumnOrder(boardId, {"column_id": columnId, "new_order": req.body.new_order})
     .then(serviceResp => {
       res.json(serviceResp.modifiedCount)
     })
