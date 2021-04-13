@@ -53,3 +53,12 @@
 .group-handle {
 
 }
+
+.input-column{
+  height: 30px;
+}
+
+.delete-icon{
+  float: right;
+  cursor: pointer;
+}

@@ -3,21 +3,23 @@
     <div class="container">
       <div class="info">Board name</div>
       <div class="scroll-area">
-        <!-- <div cdkDropList cdkDropListOrientation="horizontal" class="column-list" (cdkDropListDropped)="drop($event)">
-                    <div class="card-box" *ngFor="let col of columns" cdkDrag>
-                        <board-column name="{{col.name}}" [cards]="col.cards" cdkDrag></board-column>
-                    </div>
-                </div> -->
-
         <div dragula="COLUMNS" [(dragulaModel)]="columns" class="column-list">
           <div class="container-column" *ngFor="let col of columns">
             <div class="container-content-column">
               <span class="group-handle">
 
                 <ng-container>
-                  <span *ngIf="!isEdited;else elseBlock " class="group-handle" (click)='edited()'>{{col.name}}</span>
+                  <div>
+                    <span *ngIf="!col.isEdited;else elseBlock " 
+                    class="group-handle" 
+                    (click)='edited(col)'
+                    >{{col.name}}</span>
+
+                    <span class="delete-icon" (click)="onDelete($event, col)">X</span>
+                  </div>
                   <ng-template #elseBlock>
-                    <input onkeydown="apply(this)" *ngIf="inputAdded(); then thenBlock" />
+                    
+                   <input (keyup.enter)="onEnter($event, col)"/>
                     <ng-template #thenBlock></ng-template>
                   </ng-template>
                 </ng-container>
@@ -30,6 +32,8 @@
 
             </div>
           </div>
+
+          <input class="input-column" placeholder="new column" (keyup.enter)="onEnterNewColumn($event)"/>
         </div>
       </div>
     </div>

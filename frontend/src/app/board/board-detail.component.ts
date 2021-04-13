@@ -5,6 +5,7 @@ import { DragulaService } from "ng2-dragula";
 import { from, Subscription } from "rxjs";
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import * as _ from 'underscore';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'board-detail',
@@ -27,7 +28,8 @@ export class BoardDetailComponent implements OnInit {
   constructor(
     private boardDDService: BoardDragDropService,
     private dragulaService: DragulaService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    public dialog: MatDialog
   ) {
     this.boardId = this.activatedRoute.snapshot.paramMap.get('id');
     try{
@@ -115,7 +117,6 @@ export class BoardDetailComponent implements OnInit {
        }
       })
     );
-    
   }
 
   _updateOrderCard(targetColumnId, childNodes){
@@ -152,13 +153,35 @@ export class BoardDetailComponent implements OnInit {
     this.subs.unsubscribe();
   }
 
-  edited() {
-    this.isEdited = true;
+  edited(col) {
+    col.isEdited = true;
   }
 
-  apply(content) {
-    this.columns[0].name = content;
-    this.inputAdded = true;
-  }
+  onEnter(event, col) {
+    console.log(event.target.value)
+    let newColumnName = event.target.value
+    //TODO: call api to update name column here
+    // then set in the callback like bellow
 
+    col.isEdited = false;
+    col.name = newColumnName
+  }
+ 
+  onDelete(event, col) {
+    console.log(event.target)
+    console.log(col)
+    let idColumnForDelete =col._id
+    //TODO: call api to delete column here
+    // then show console.log response.
+    // I will handle UI and make it disappear.
+
+    col.isDeleted = true;
+  }
+  
+  onEnterNewColumn(event) {
+    console.log(event.target.value)
+    let newColumnName = event.target.value
+    //TODO: Tung Note. call api to create new column here
+    // And dont handle about callback UI, I will take it
+  }
 }
