@@ -14,7 +14,7 @@ export class AppComponent {
   userInfoData: Object = null
   private user = new Subject();
   public userInfo$ = this.user.asObservable();
-  private fName : String
+  private fName : String = ""
 
   constructor(private authService: AuthService,private userService: UserService) {
     this.userInfo$ = this.authService.user$;
@@ -22,7 +22,6 @@ export class AppComponent {
   }
 
   ngOnInit() {
-
     this.userService.getUserInfo().subscribe(
       res => {
         console.log(res['first_name'])

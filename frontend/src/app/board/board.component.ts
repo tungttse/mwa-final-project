@@ -25,7 +25,6 @@ export class BoardComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getListBoards().subscribe(
       res => {
-        console.log(res)
         if(res['error']) {
           this.content = "Error " + res['error']
         }
