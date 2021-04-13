@@ -25,9 +25,10 @@ import { CardComponent } from './board/card.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditCardComponent } from './board/edit-card.component';
+import { ToastrModule } from 'ngx-toastr';
 
 const routes: Routes = [
-  { path: '' , component: BoardComponent },
+  { path: '' , component: BoardComponent, canActivate: [UserGuard] },
   { path: 'login' , component: LoginComponent },
   { path: 'signup' , component: SignupComponent },
   { path: 'logout' , component: LogoutComponent },
@@ -60,7 +61,12 @@ const routes: Routes = [
     MatDialogModule,
     MaterialModule,
     FlexLayoutModule,
-    DragulaModule.forRoot()
+    DragulaModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-top-center',
+      preventDuplicates: true,
+    }), // ToastrModule added
     
   ],
   providers: [

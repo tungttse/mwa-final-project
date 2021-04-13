@@ -30,7 +30,7 @@ export class SignupComponent {
     ) {
     
     this.myForm = this.formBuilder.group({
-      'email': ['abc@gmail.com', [
+      'email': ['', [
         Validators.required, 
         Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"),
       ], this.asyncEmailValidator.bind(this)],

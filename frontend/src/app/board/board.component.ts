@@ -70,4 +70,5 @@ export class BoardComponent implements OnInit {
     console.log(board);
 
   }
+
 }
