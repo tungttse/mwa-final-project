@@ -19,6 +19,10 @@ export class UserService {
       });
     }
     
+  getUserInfo() {
+    return this.http.get(this.serverUrl + '/')
+  }
+
   getListBoards(){
     return this.http.get(this.serverUrl + '/boards')
   }
