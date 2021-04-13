@@ -55,6 +55,7 @@
   height: 32px;
   font-weight: 600;
   text-transform: uppercase;
+  cursor: move;
 }
 
 .column_items{
