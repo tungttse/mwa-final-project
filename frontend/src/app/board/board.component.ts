@@ -49,7 +49,7 @@ export class BoardComponent implements OnInit {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: 'Confirm Remove Board',
-        message: 'Are you sure, you want to remove this board: ' + board.name
+        message: 'Are you sure you want to remove this board: ' + board.name
       }
     });
     confirmDialog.afterClosed().subscribe(result => {
