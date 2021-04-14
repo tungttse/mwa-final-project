@@ -8,6 +8,8 @@ Simple trello board clone with some main features:
 - Card management: this is the tasks, user can create/edit/delete cards.
 - Drag and Drop to change the order of columns, cards.
   
+  ![usecases](/screenshots/usercases.png)
+
 ## Screenshots
 
 Boards
