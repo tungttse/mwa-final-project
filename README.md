@@ -2,7 +2,7 @@
 
 Simple trello board clone with some main features:
 
-- User authentication : login, signup
+- User authentication / authorization : login, signup
 - Board management: end users can create/edit/delete boards
 - Column management: in each board, user can create/edit/delete columns to organize the tasks
 - Card management: this is the tasks, user can create/edit/delete cards.
