@@ -6,5 +6,5 @@
 - Material Angular UI
 ## Authors:
 - Thanh Tung Truong
-- Admad Osaili
+- Ahmad Osaili
 - Sami Daralbarmeel

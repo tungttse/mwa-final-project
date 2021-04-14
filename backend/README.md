@@ -6,5 +6,5 @@
 - MongoDb
 ## Authors:
 - Thanh Tung Truong
-- Admad Osaili
+- Ahmad Osaili
 - Sami Daralbarmeel
